@@ -10,7 +10,7 @@ class Ship:
         self.start_column = ""
         self.start_row = ""
 
-        self.squares = self.set_size()
+        self.squares_list = self.set_size()
 
     def set_size(self):
         sizes = {"carrier": 5, "battleship": 4, "cruiser": 3, "submarine": 3, "destroyer": 2}
@@ -19,7 +19,7 @@ class Ship:
         return [Square() for i in range(size)]
 
     def check_status(self):
-        is_hit_statuses = [square.is_hit for square in squares]
+        is_hit_statuses = [square.is_hit for square in self.squares_list]
 
         self.is_sunk = False if False in is_hit_statuses else True
 
