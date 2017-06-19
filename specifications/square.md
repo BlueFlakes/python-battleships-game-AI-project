@@ -4,13 +4,13 @@
 ## Class Square
 #### Instance Attributes
 * ```row```
-    - data:
-    - description:
+    - data: int
+    - description: square horizontal position
 
 * ```column```
-    - data:
-    - description:
+    - data: int
+    - description: square vertical position
 
-* ```title```
-    - data:
-    - description:
+* ```is_hit```
+    - data: bool
+    - description: element of ship, alive or not
