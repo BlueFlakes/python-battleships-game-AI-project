@@ -4,10 +4,13 @@
 ## Class Square
 #### Instance Attributes
 * ```row```
-    - lala
+    - data:
+    - description:
 
 * ```column```
-    - lala
+    - data:
+    - description:
 
-*##### ```title```
-    - lala
+* ```title```
+    - data:
+    - description:
