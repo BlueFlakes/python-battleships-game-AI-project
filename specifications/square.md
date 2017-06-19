@@ -17,10 +17,12 @@
 
 #### Instance Methods
 * ##### ```__init__(self, row, column, is_hit)```
-    - Constructs an square, element of ship
+  Constructs an square, element of ship
     
 * ```is_hit```
-    - change the status of square
+  
+  change the status of square
     
 * ```__str__(self)```
-    - return string according to is_hit value(bool)
+  
+  return string according to is_hit value(bool)
