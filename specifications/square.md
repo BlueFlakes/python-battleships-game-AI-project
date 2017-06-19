@@ -25,3 +25,4 @@
 * ```__str__(self)```
     return string according to is_hit value(bool)
     
+    
