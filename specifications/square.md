@@ -17,3 +17,4 @@
 
 #### Instance Methods
 ##### * ```__init__(self, row, column, is_hit)```
+    Constructs an square, element of ship
