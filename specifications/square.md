@@ -14,3 +14,5 @@
 * ```is_hit```
     - data: bool
     - description: element of ship, alive or not
+
+#### Instance Methods
