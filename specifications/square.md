@@ -16,4 +16,4 @@
     - description: element of ship, alive or not
 
 #### Instance Methods
-## * ```__init__(self, row, column, is_hit)```
+##### * ```__init__(self, row, column, is_hit)```
