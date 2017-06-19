@@ -14,6 +14,10 @@
 * ```is_hit```
     - data: bool
     - description: element of ship, alive or not
+    
+* ```is_ship```
+    - data: bool
+    - description: is square element of ship
 
 #### Instance Methods
 * ##### ```__init__(self, row, column, is_hit)```
