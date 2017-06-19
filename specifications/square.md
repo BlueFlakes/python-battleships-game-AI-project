@@ -19,7 +19,7 @@
 * ##### ```__init__(self, row, column, is_hit)```
   Constructs an square, element of ship
     
-* ```is_hit```
+* ```is_hit(self)```
   
   change the status of square
     
