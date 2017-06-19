@@ -1,10 +1,11 @@
+import ui
 from ocean import Ocean
 
 
 class Player:
 
-    def __init__(self):
-        self.name = ""
+    def __init__(self, name):
+        self.name = name
         self.is_winner = False
         self.ocean = Ocean()
 
