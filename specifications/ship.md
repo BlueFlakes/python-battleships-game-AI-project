@@ -34,20 +34,15 @@ __Instance methods__
 
 * ##### ` __init__(self, name)`
 
+    - Constructs a Ship object
 
-  Constructs a Ship object
 
 * `__str__(self)`
 
-
-  Returns a formatted string with squares printed horizontally or vertically.
+  - Returns a formatted string with squares printed horizontally or vertically.
   
 *  `check_status(self)`
-
-
-  Checks if all squares of ship are hit. If yes, sets self.is_sunk to True.
+   - Checks if all squares of ship are hit. If yes, sets *self.is_sunk* to True.
 
 *  `set_size(self)`
-
-
-  Sets size attribute based on name of ship.
+   - Sets *size* attribute based on name of ship.
