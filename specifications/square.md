@@ -5,7 +5,9 @@
 #### Instance Attributes
 * ```row```
     - lala
+
 * ```column```
     - lala
+
 ####* ```title```
     - lala
