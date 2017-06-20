@@ -1,4 +1,4 @@
-import ui
+from ui import Ui
 from ocean import Ocean
 
 
@@ -21,7 +21,7 @@ class Player:
         self.is_winner = False if False in ships_statuses else True
 
     def shot(self):
-        coordinates = ui.get_inputs(["First coordinate", "Second coordinate"], "Where do you want to shot?")
+        coordinates = Ui.get_inputs(["First coordinate", "Second coordinate"], "Where do you want to shot?")
         coordinates = str(coordinates[0]) + str(coordinates[1])
 
         self.ocean.shot(coordinates)
