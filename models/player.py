@@ -1,5 +1,6 @@
-from ui import Ui
-from ocean import Ocean
+from Interface.ui import Ui
+from models.game import Game
+from models.ocean import Ocean
 
 
 class Player:

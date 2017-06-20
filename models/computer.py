@@ -1,6 +1,6 @@
 from random import randint
 
-from ocean import Ocean
+from models.ocean import Ocean
 
 
 class Computer:

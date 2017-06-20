@@ -1,4 +1,4 @@
-from square import Square
+from models.square import Square
 
 
 class Ocean:
@@ -36,13 +36,3 @@ class Ocean:
 
     def is_every_ship_sunk(self):
         pass
-
-
-def main():
-    baltic = Ocean()
-    print(baltic)
-
-
-
-if __name__ == '__main__':
-    main()

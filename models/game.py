@@ -1,7 +1,7 @@
 from random import randint
 from time import sleep
 
-from ui import Ui
+from Interface.ui import Ui
 
 
 class Game:
