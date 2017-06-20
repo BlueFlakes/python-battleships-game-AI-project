@@ -35,7 +35,7 @@ def choose():
         ui.display_screen("screens/credits.txt", True)
 
     elif option == "0":
-        print("Good bye!")
+        ui.print_message("Good bye!")
 
     return option
 
