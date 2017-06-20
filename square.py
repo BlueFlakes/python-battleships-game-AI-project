@@ -12,7 +12,7 @@ class Square:
             self.is_hit = True
 
         else:
-            ui.print_error_message('FAIL')
+            Ui.print_error_message('FAIL')
 
     def attach_square_to_ship(self):
         self.is_element_of_ship = True
@@ -29,12 +29,3 @@ class Square:
             part_of_table = '~'
 
         return part_of_table
-
-
-def main():
-    kratka = Square(3,3)
-    print(kratka)
-    pass
-
-if __name__ == "__main__":
-    main()
