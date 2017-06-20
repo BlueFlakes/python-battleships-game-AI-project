@@ -35,7 +35,6 @@ class Ocean:
 
 def main():
     baltic = Ocean()
-
     print(baltic)
 
 
