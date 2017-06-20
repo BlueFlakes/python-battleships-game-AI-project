@@ -3,9 +3,7 @@ import ui
 
 class Square:
 
-    def __init__(self, row, column):
-        self.row = row
-        self.column = column
+    def __init__(self):
         self.is_element_of_ship = False
         self.is_hit = False
 
@@ -34,6 +32,8 @@ class Square:
 
 
 def main():
+    kratka = Square(3,3)
+    print(kratka)
     pass
 
 if __name__ == "__main__":
