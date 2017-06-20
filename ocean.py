@@ -11,20 +11,29 @@ class Ocean:
 
     def __str__(self):
         board_to_display = ''
+        board, enemy_board, row_index = self.__enumerate_alpha_index()
 
-        for i in range(self.__board_size):
-            row_board = [item.__str__() for item in self.board[i]]
-            row_enemy_board = [item.__str__() for item in self.enemy_board[i]]
-            longest_number = len(str(self.__board_size)) + 2
-            space_amount = longest_number - len(str(i+1))
+        for i in range(self.__board_size+1):
+            row_board = [item.__str__() for item in board[i]]
+            row_enemy_board = [item.__str__() for item in enemy_board[i]]
+            longest_number = max([len(row) for row in row_index]) + 1
+            space_amount = longest_number - len(str(i))
 
-            board_to_display += str(i + 1) + space_amount * ' ' + str(' '.join(row_board)) + (8 * ' ')
-            board_to_display += str(i + 1) + space_amount * ' ' + str(' '.join(row_enemy_board)) + '\n'
+            board_to_display += row_index[i] + space_amount * ' ' + str(' '.join(row_board)) + (8 * ' ')
+            board_to_display += row_index[i] + space_amount * ' ' + str(' '.join(row_enemy_board)) + '\n'
 
         return board_to_display
 
-    def update_board(self):
-        pass
+
+    def __enumerate_alpha_index(self):
+        alpha = [chr(i) for i in range(65, 65 + self.__board_size)]
+        enumerate_records = [' ' if i == 0 else str(i) for i in range(self.__board_size+2)]
+        board = self.board[:]
+        enemy_board = self.enemy_board[:]
+        board.insert(0, alpha)
+        enemy_board.insert(0, alpha)
+
+        return board, enemy_board, enumerate_records
 
     def add_ship_to_board(self, ship):
         pass
