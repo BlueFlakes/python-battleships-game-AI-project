@@ -5,6 +5,7 @@ from ui import Ui
 
 
 class Game:
+
     def __init__(self, player1, player2):
         self.type = "Multi player"
         self.player1 = player1
@@ -48,7 +49,8 @@ class Game:
 
     def turn(self):
         while not self.is_over:
-            Ui.print_message(self.player_in_round.name)
+            Ui.print_message(self.player_in_round.name + "     " + "")
+            Ui.print_message(self.player_in_round.ocean)
             self.player_in_round.shot()
             sleep(3)
             if self.is_over:
