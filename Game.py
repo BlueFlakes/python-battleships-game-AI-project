@@ -15,5 +15,7 @@ class Game:
         self.is_over = self.is_game_over()
 
     def is_game_over(self):
-        if self.player1.check_status() == True or self.player2.check_status() == True:
+        if self.player1.check_status() is True or self.player2.check_status() is True:
             return True
+
+    def start_game(self):

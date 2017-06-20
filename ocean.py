@@ -15,9 +15,11 @@ class Ocean:
         for i in range(self.__board_size):
             row_board = [item.__str__() for item in self.board[i]]
             row_enemy_board = [item.__str__() for item in self.enemy_board[i]]
+            longest_number = len(str(self.__board_size)) + 2
+            space_amount = longest_number - len(str(i+1))
 
-            board_to_display += (str(' '.join(row_board)) + (8 * ' ') +
-                                 str(' '.join(row_enemy_board)) + '\n')
+            board_to_display += str(i + 1) + space_amount * ' ' + str(' '.join(row_board)) + (8 * ' ')
+            board_to_display += str(i + 1) + space_amount * ' ' + str(' '.join(row_enemy_board)) + '\n'
 
         return board_to_display
 
