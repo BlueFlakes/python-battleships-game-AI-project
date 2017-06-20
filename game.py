@@ -48,9 +48,20 @@ class Game:
 
     def turn(self):
         while not self.is_over:
+            Ui.print_message(self.player_in_round.name)
             self.player_in_round.shot()
             sleep(3)
             if self.is_over:
                 Ui.print_message("{} won".format(self.player_in_round.name))
                 break
             self.player_switch()
+
+    @classmethod
+    def check_coordinates(cls, coordinates):
+        if coordinates[0].isdigit() and coordinates[1].isdigit():
+            if int(coordinates[0]) in range(1, 10) and int(coordinates[1]) in range(1, 10):
+                return True
+            else:
+                return False
+        else:
+            return False

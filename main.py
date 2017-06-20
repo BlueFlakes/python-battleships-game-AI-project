@@ -1,7 +1,7 @@
-from ui import Ui
-from game import Game
 from computer import Computer
+from game import Game
 from player import Player
+from ui import Ui
 
 
 def main():
@@ -41,7 +41,7 @@ def choose():
 
 
 def start_singleplayer():
-    # Ui.display_screen("screens/level.txt")
+    # ui.display_screen("screens/level.txt")
     data = Ui.get_inputs(["Name", "Level"], "Please provide your name and choose difficulty level")
     player1 = Player(data[0])
 
@@ -67,6 +67,7 @@ def start_simulation():
 
     computer1 = Computer(level)
     computer2 = Computer(level)
+    computer2.name = "Computer2"
 
     gameplay = Game(computer1, computer2)
     gameplay.start_game()
