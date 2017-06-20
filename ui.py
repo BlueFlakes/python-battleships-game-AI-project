@@ -45,3 +45,6 @@ def display_screen(file_name, wait_for_exit=False):
         while not option == "0":
             option = get_inputs([""], "")
             option = option[0]
+
+def print_error_message(message):
+    print(message)
