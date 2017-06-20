@@ -24,7 +24,6 @@ class Ocean:
 
         return board_to_display
 
-
     def __enumerate_alpha_index(self):
         alpha = [chr(i) for i in range(65, 65 + self.__board_size)]
         enumerate_records = [' ' if i == 0 else str(i) for i in range(self.__board_size+2)]
@@ -41,7 +40,6 @@ class Ocean:
 
 def main():
     baltic = Ocean()
-
     print(baltic)
 
 
