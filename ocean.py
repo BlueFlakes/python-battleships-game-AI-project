@@ -6,21 +6,8 @@ class Ocean:
 
     def __init__(self):
         self.ships = []
-        self.enemy_board = []
-        self.board = []
-
-    def create_board(self):
-        new_board = []
-
-        for x in range(self.__board_size):
-            temp = []
-
-            for y in range(self.__board_size):
-                temp.append(Square(x, y))
-
-            new_board.append(temp)
-
-        return new_board
+        self.enemy_board = [[Square() for j in range(self.__board_size)] for i in range(self.__board_size)]
+        self.board = [[Square() for j in range(self.__board_size)] for i in range(self.__board_size)]
 
     def __str__(self):
         board_to_display = ''
@@ -34,7 +21,10 @@ class Ocean:
 
         return board_to_display
 
-    def update_board(self, ship):
+    def update_board(self):
+        pass
+
+    def add_ship_to_board(self, ship):
         pass
 
     def is_every_ship_sunk(self):
@@ -43,10 +33,6 @@ class Ocean:
 
 def main():
     baltic = Ocean()
-    baltic.create_board()
-
-    baltic.board = baltic.create_board()
-    baltic.enemy_board = baltic.create_board()
 
     print(baltic)
 
