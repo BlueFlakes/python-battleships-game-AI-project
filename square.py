@@ -8,11 +8,7 @@ class Square:
         self.is_hit = False
 
     def hit(self):
-        if self.is_element_of_ship:
-            self.is_hit = True
-
-        else:
-            Ui.print_error_message('FAIL')
+        self.is_hit = True
 
     def attach_square_to_ship(self):
         self.is_element_of_ship = True
@@ -26,6 +22,10 @@ class Square:
                 part_of_table = 'x'
 
         else:
-            part_of_table = '~'
+            if not self.is_hit:
+                part_of_table = '~'
+
+            else:
+                part_of_table = '.'
 
         return part_of_table

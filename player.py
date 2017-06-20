@@ -21,7 +21,13 @@ class Player:
         self.is_winner = False if False in ships_statuses else True
 
     def shot(self):
-        coordinates = Ui.get_inputs(["First coordinate", "Second coordinate"], "Where do you want to shot?")
-        coordinates = str(coordinates[0]) + str(coordinates[1])
+        proper_coordinates = False
 
-        self.ocean.shot(coordinates)
+        while not proper_coordinates:
+            coordinates = Ui.get_inputs(["First coordinate", "Second coordinate"], "Where do you want to shot?")
+            proper_coordinates = Game.check_coordinates(coordinates)
+
+        row = int(coordinates[0])
+        column = int(coordinates[1])
+        square = self.ocean.enemy_board[row][column]
+        square.hit()

@@ -35,9 +35,6 @@ class Ocean:
 
         return board, enemy_board, enumerate_records
 
-    def add_ship_to_board(self, ship):
-        pass
-
     def is_every_ship_sunk(self):
         pass
 
@@ -46,6 +43,7 @@ def main():
     baltic = Ocean()
 
     print(baltic)
+
 
 
 if __name__ == '__main__':
