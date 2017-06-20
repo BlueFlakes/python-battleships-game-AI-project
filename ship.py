@@ -1,4 +1,4 @@
-import ui
+from ui import Ui
 from square import Square
 
 
@@ -20,7 +20,7 @@ class Ship:
         try:
             size = sizes[self.name]
         except KeyError:
-            ui.print_message("Provided ship name is wrong.")
+            Ui.print_message("Provided ship name is wrong.")
 
         return size
 
@@ -30,18 +30,37 @@ class Ship:
         self.is_sunk = False if False in is_hit_statuses else True
 
     def place_ship(self, board):
+        row = self.start_row
+        column = self.start_column
 
         for i in range(self.size):
-            board[self.start_row, self.start_column].is_element_of_ship = True
-            self.squares.append(board[self.start_row, self.start_column])
+            try:
+                is_close = check_enviroment(board)
+                board[row, column].is_element_of_ship = True
+                self.squares.append(board[row, column])
 
-            if self.direction == "right":
-                self.start_column += 1
-            if self.direction == "left":
-                self.start_column -= 1
-            if self.direction == "up":
-                self.start_row -= 1
-            if self.direction == "down":
-                self.start_row += 1
+                if self.direction == "right":
+                    column += 1
+                if self.direction == "left":
+                    column -= 1
+                if self.direction == "up":
+                    row -= 1
+                if self.direction == "down":
+                    row += 1
+
+            except IndexError:
+                Ui.print_message("Ship can't be placed out of board!")
 
             return board
+
+    def check_enviroment(board):
+        ship_start = board[self.start_row, start_column]
+
+        if self.direction == "right":
+            column += 1
+        if self.direction == "left":
+            column -= 1
+        if self.direction == "up":
+            row -= 1
+        if self.direction == "down":
+            row += 1
