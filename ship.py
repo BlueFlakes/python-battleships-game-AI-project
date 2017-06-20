@@ -35,7 +35,7 @@ class Ship:
 
         for i in range(self.size):
             try:
-                is_close = check_enviroment(board)
+                #is_close = check_enviroment(board)
                 board[row, column].is_element_of_ship = True
                 self.squares.append(board[row, column])
 
