@@ -24,8 +24,13 @@ class Ocean:
 
     def __str__(self):
         board_to_display = ''
-        for i in range(len(temp1)):
-            board_to_display += str(' '.join(temp1[i])) + (5 * ' ') + str(' '.join(temp2[i])) + '\n'
+
+        for i in range(self.__board_size):
+            row_board = [item.__str__() for item in self.board[i]]
+            row_enemy_board = [item.__str__() for item in self.enemy_board[i]]
+
+            board_to_display += (str(' '.join(row_board)) + (8 * ' ') +
+                                 str(' '.join(row_enemy_board)) + '\n')
 
         return board_to_display
 
@@ -39,9 +44,11 @@ class Ocean:
 def main():
     baltic = Ocean()
     baltic.create_board()
-    print(baltic)
+
     baltic.board = baltic.create_board()
-    print(baltic.board)
+    baltic.enemy_board = baltic.create_board()
+
+    print(baltic)
 
 
 if __name__ == '__main__':
