@@ -26,11 +26,10 @@ def choose():
         start_singleplayer()
 
     elif option == "2":
-        player1, player2 = start_multiplayer()
-        game = Game(player1, player2)
+        start_multiplayer()
 
     elif option == "3":
-        computer1, computer2 = start_simulation()
+        start_simulation()
 
     elif option == "4":
         ui.display_screen("screens/credits.txt", True)
