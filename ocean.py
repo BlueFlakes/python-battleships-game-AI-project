@@ -34,14 +34,16 @@ class Ocean:
 
         return board, enemy_board, enumerate_records
 
+    def add_ship_to_ocean(self, ship):
+        self.ships.append(ship)
+
     def is_every_ship_sunk(self):
-        pass
+        ships_condition = False if False in [ship.is_sunk for ship in self.ships] else True
+        return ships_condition
 
 
 def main():
-    baltic = Ocean()
-    print(baltic)
-
+    baltic_sea = Ocean()
 
 
 if __name__ == '__main__':
