@@ -11,8 +11,12 @@
 						  Welcome in Titanic simulator!
 					
 
-							1. Start new game
-							
-							2. Credits screen
+						   1. Start singleplayer game
+						
+						    2. Start multiplayer game
 
-							3. Exit the game
+						       3. Start simulation
+							
+							4. Credits screen
+
+							 0. Exit the game
