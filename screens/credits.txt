@@ -10,8 +10,11 @@
 
 
 							        Authors:
+
 							     - Kamil Konior
-							  - Jakub Janiszewski
+							     - Paweł Syktus
+							     - Marek Stopka
+							   - Jakub Janiszewski
 
 							  All rights reserved Ⓡ
 

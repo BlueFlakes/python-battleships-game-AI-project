@@ -1,5 +1,4 @@
 import os
-import ui
 
 
 def get_inputs(list_labels, title):
@@ -44,5 +43,5 @@ def display_screen(file_name, wait_for_exit=False):
     if wait_for_exit is True:
         option = float("inf")
         while not option == "0":
-            option = ui.get_inputs([""], "")
+            option = get_inputs([""], "")
             option = option[0]
