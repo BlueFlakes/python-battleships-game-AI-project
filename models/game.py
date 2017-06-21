@@ -66,11 +66,11 @@ class Game:
             Ui.print_message(self.player_in_round.name + "     " + "")
             Ui.print_message(self.player_in_round.ocean)
             self.player_in_round.shot()
-            if self.player_in_round != self.player1:
+            if self.player_in_round == self.player1:
                 self.player2.ocean.board = self.player_in_round.ocean.enemy_board
             else:
                 self.player1.ocean.board = self.player_in_round.ocean.enemy_board
-            sleep(3)
+            sleep(2)
             if self.is_over:
                 Ui.print_message("{} won".format(self.player_in_round.name))
                 break
