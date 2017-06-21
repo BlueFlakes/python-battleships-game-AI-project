@@ -18,12 +18,12 @@ class Player:
             return "{} is a loser!".format(self.name)
 
     def check_status(self):
+        for ship in self.ocean.ships: ship.ship_status()
         self.is_winner = self.ocean.is_every_ship_sunk()
 
         return self.is_winner
 
     def shot(self, enemy_ocean):
-        for ship in self.ocean.ships: ship.ship_status()
         proper_coordinates = False
         alphanumeric_dict = dict([[item for item in pair[::-1]] for pair in enumerate(self.ocean.alphabet_list[:])])
 
@@ -39,6 +39,7 @@ class Player:
         if square.is_element_of_ship:
             enemy_square.is_element_of_ship = True
         enemy_square.hit()
+
 
     def set_ships(self):
         for key, value in Ship.sizes.items():
