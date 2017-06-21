@@ -23,6 +23,7 @@ class Player:
         return self.is_winner
 
     def shot(self, enemy_ocean):
+        for ship in self.ocean.ships: ship.ship_status()
         proper_coordinates = False
         alphanumeric_dict = dict([[item for item in pair[::-1]] for pair in enumerate(self.ocean.alphabet_list[:])])
 
