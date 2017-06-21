@@ -2,6 +2,7 @@ from ui import Ui
 from square import Square
 from ocean import Ocean
 
+
 class Ship:
 
     def __init__(self, ship_name, row, column, direction):
