@@ -24,13 +24,14 @@ class Player:
 
     def shot(self):
         proper_coordinates = False
+        alphanumeric_dict = dict([[item for item in pair[::-1]] for pair in enumerate(self.ocean.alphabet_list[:])])
 
         while not proper_coordinates:
             coordinates = Ui.get_inputs(["First coordinate", "Second coordinate"], "Where do you want to shot?")
-            proper_coordinates = Game.check_coordinates(coordinates, self.ocean.alpha)
+            proper_coordinates = Game.check_coordinates(coordinates, alphanumeric_dict)
 
         row = int(coordinates[1]) - 1
-        column = self.ocean.alpha[coordinates[0].upper()]
+        column = alphanumeric_dict[coordinates[0].upper()]
         square = self.ocean.enemy_board[row][column]
         square.hit()
 
