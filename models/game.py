@@ -36,11 +36,13 @@ class Game:
         first_player_number = randint(1, 2)
         if first_player_number == 1:
             self.player_in_round = self.player1
+
         else:
             self.player_in_round = self.player2
 
         self.player1.set_ships()
         self.player2.set_ships()
+
         self.turn()
 
     def set_first_player(self):
@@ -61,17 +63,20 @@ class Game:
         while not self.is_over:
             Ui.print_message(self.player_in_round.name + "     " + "")
             Ui.print_message(self.player_in_round.ocean)
-            self.player_in_round.shot()
-            sleep(3)
+            if self.player_in_round == self.player1:
+                self.player_in_round.shot(self.player2.ocean)
+            else:
+                self.player_in_round.shot(self.player1.ocean)
+            sleep(2)
             if self.is_over:
                 Ui.print_message("{} won".format(self.player_in_round.name))
                 break
             self.player_switch()
 
     @classmethod
-    def check_coordinates(cls, coordinates, alpha_index):
+    def check_coordinates(cls, coordinates, alphanumeric_dict):
         if coordinates[1].isdigit():
-            if coordinates[0].upper() in alpha_index and int(coordinates[1]) in range(1, 10):
+            if coordinates[0].upper() in alphanumeric_dict and int(coordinates[1]) in range(1, 11):
                 return True
             else:
                 return False

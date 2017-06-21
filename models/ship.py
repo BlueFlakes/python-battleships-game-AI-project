@@ -3,7 +3,9 @@ from models.square import Square
 from models.ocean import Ocean
 
 
+
 class Ship:
+    sizes = {"carrier": 5, "battleship": 4, "cruiser": 3, "submarine": 3, "destroyer": 2}
 
     def __init__(self, ship_name, row, column, direction):
         self.name = ship_name.lower()
@@ -16,10 +18,9 @@ class Ship:
         self.squares = []
 
     def set_size(self):
-        sizes = {"carrier": 5, "battleship": 4, "cruiser": 3, "submarine": 3, "destroyer": 2}
 
         try:
-            size = sizes[self.name]
+            size = Ship.sizes[self.name]
         except KeyError:
             Ui.print_message("Provided ship name is wrong.")
 
@@ -73,7 +74,6 @@ class Ship:
             for j in range(3):
                 try:
                     if self.start_row + j - 1 < 0 or self.start_column + i - 1 < 0:
-                        print("wrong")
                         continue
                     elif self.direction == 'right':
                         squares_around.append(board[self.start_row + j - 1][self.start_column + i - 1])
@@ -85,10 +85,7 @@ class Ship:
                         squares_around.append(board[self.start_row - i + 1][self.start_column + j - 1])
 
                 except IndexError:
-                    print("wrong index")
                     continue
-
-        print(len(squares_around))
 
         return squares_around
 
@@ -110,4 +107,3 @@ class Ship:
             end_column = "too far"
 
         return end_row, end_column
-

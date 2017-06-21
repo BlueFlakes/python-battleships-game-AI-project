@@ -1,6 +1,7 @@
 from Interface.ui import Ui
 from models.game import Game
 from models.ocean import Ocean
+from models.ship import Ship
 
 
 class Player:
@@ -21,15 +22,30 @@ class Player:
 
         self.is_winner = False if False in ships_statuses else True
 
-    def shot(self):
+    def shot(self, enemy_ocean):
         proper_coordinates = False
-
+        alphanumeric_dict = dict([[item for item in pair[::-1]] for pair in enumerate(self.ocean.alphabet_list[:])])
 
         while not proper_coordinates:
             coordinates = Ui.get_inputs(["First coordinate", "Second coordinate"], "Where do you want to shot?")
-            proper_coordinates = Game.check_coordinates(coordinates, self.ocean.alpha)
+            proper_coordinates = Game.check_coordinates(coordinates, alphanumeric_dict)
 
         row = int(coordinates[1]) - 1
-        column = self.ocean.alpha[coordinates[0].upper()]
-        square = self.ocean.enemy_board[row][column]
+        column = alphanumeric_dict[coordinates[0].upper()]
+        square = enemy_ocean.board[row][column]
+        enemy_square = self.ocean.enemy_board[row][column]
         square.hit()
+        if square.is_element_of_ship:
+            enemy_square.is_element_of_ship = True
+        enemy_square.hit()
+
+    def set_ships(self):
+        for key, value in Ship.sizes.items():
+            is_close = True
+            while is_close:
+                ship_specification = Ui.get_inputs(["Row", "Column", "Direction"],
+                                                   "\nPlease place {} which length is {}".format(key, value))
+                ship = Ship(key, ship_specification[0], ship_specification[1], ship_specification[2])
+                is_close = ship.check_enviroment(self.ocean.board)
+                ship.place_ship(self.ocean.board)
+                Ui.print_message(self.ocean)
