@@ -5,6 +5,8 @@ from models.ship import Ship
 
 
 class Computer:
+    allowed_levels = ["Easy", "Medium", "Hard"]
+
     def __init__(self, level):
         self.name = "Computer"
         self.level = level
@@ -20,8 +22,9 @@ class Computer:
     def shot(self, enemy_ocean):
         hit = False
         while not hit:
-            row = randint(0, 9)
-            column = randint(0, 9)
+            if self.level == "Easy":
+                row = randint(0, 9)
+                column = randint(0, 9)
             if [row, column] not in self.previous_shots:
                 self.previous_shots.append((row, column))
                 square = enemy_ocean.board[row][column]
