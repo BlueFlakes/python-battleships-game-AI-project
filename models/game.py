@@ -68,9 +68,9 @@ class Game:
             self.player_switch()
 
     @classmethod
-    def check_coordinates(cls, coordinates, alpha_index):
+    def check_coordinates(cls, coordinates, alphabet_dict):
         if coordinates[1].isdigit():
-            if coordinates[0].upper() in alpha_index and int(coordinates[1]) in range(1, 10):
+            if coordinates[0].upper() in alphabet_dict and int(coordinates[1]) in range(1, 11):
                 return True
             else:
                 return False
