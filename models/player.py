@@ -22,7 +22,7 @@ class Player:
 
         self.is_winner = False if False in ships_statuses else True
 
-    def shot(self):
+    def shot(self, enemy_ocean):
         proper_coordinates = False
         alphanumeric_dict = dict([[item for item in pair[::-1]] for pair in enumerate(self.ocean.alphabet_list[:])])
 
@@ -32,8 +32,12 @@ class Player:
 
         row = int(coordinates[1]) - 1
         column = alphanumeric_dict[coordinates[0].upper()]
-        square = self.ocean.enemy_board[row][column]
+        square = enemy_ocean.board[row][column]
+        enemy_square = self.ocean.enemy_board[row][column]
         square.hit()
+        if square.is_element_of_ship:
+            enemy_square.is_element_of_ship = True
+        enemy_square.hit()
 
     def set_ships(self):
         for key, value in Ship.sizes.items():
