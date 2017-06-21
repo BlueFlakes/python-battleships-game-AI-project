@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width = device-width, initial-scale = 1">
+    <title>TITANIC GAME</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/static/js/index.js"></script>
+</head>
+
+<body>
+<div>
+    <h1>WELCOME</h1>
+    <article>
+        <p>Choose Option</p>
+        <button id="single_init" class="button" onclick="show_single()">Single Player</button>
+        <form action="/single" method="post">
+            <div id="single_fields" class="option_fields" style="display: none">
+                <input name="computer_level" class="button" type="text"/>
+                <input name="player_name" class="button" type="text"/>
+                <input class="button" type="submit" value="Single Player"/>
+            </div>
+        </form>
+        <p>........................................</p>
+        <button id="multi_init" class="button" onclick="show_multi()">Multi Player</button>
+        <form action="/multi" method="post">
+            <div id="multi_fields" class="option_fields" style="display: none">
+                <input name="player1_name" class="button" type="text"/>
+                <input name="player2_name" class="button" type="text"/>
+                <input class="button" type="submit" value="Multi Player"/>
+            </div>
+        </form>
+        <p>........................................</p>
+        <button id="simulation_init" class="button" onclick="show_simulation()">Simulation</button>
+        <form action="/simulation" method="post">
+            <div id="simulation_fields" class="option_fields" style="display: none">
+                <input name="computer1_level" id="computer1_level" class="button" type="text">
+                <input name="computer2_level" id="computer2_level" class="button" type="text">
+                <input id="simulation_start" class="button" type="submit" value="Simulation"/>
+            </div>
+        </form>
+        <p>........................................</p>
+    </article>
+</div>
+</body>
+</html>

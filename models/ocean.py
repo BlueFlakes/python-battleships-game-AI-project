@@ -1,4 +1,4 @@
-from square import Square
+from models.square import Square
 
 
 class Ocean:
