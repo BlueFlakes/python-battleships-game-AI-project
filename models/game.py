@@ -67,7 +67,7 @@ class Game:
                 self.player2.ocean = self.player_in_round.shot(self.player2.ocean)
             else:
                 self.player1.ocean = self.player_in_round.shot(self.player1.ocean)
-            sleep(2)
+            sleep(0.5)
             if self.is_over:
                 Ui.print_message("{} won".format(self.player_in_round.name))
                 break
