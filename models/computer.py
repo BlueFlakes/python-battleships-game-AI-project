@@ -16,13 +16,12 @@ class Computer:
         self.is_winner = False
 
     def check_status(self):
+        for ship in self.ocean.ships: ship.ship_status()
         self.is_winner = self.ocean.is_every_ship_sunk()
 
         return self.is_winner
 
     def shot(self, enemy_ocean):
-        for ship in self.ocean.ships: ship.ship_status()
-
         hit = False
         while not hit:
             if self.level == "Easy":
@@ -43,6 +42,8 @@ class Computer:
                         return enemy_ocean
                 elif square == self.last_shot:
                     continue
+
+
 
     def set_ships(self):
         directions = ['up', 'down', 'left', 'right']
