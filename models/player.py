@@ -1,6 +1,7 @@
 from Interface.ui import Ui
 from models.game import Game
 from models.ocean import Ocean
+from models.ship import Ship
 
 
 class Player:
@@ -33,3 +34,14 @@ class Player:
         column = alphanumeric_dict[coordinates[0].upper()]
         square = self.ocean.enemy_board[row][column]
         square.hit()
+
+    def set_ships(self):
+        for key, value in Ship.sizes.items():
+            is_close = True
+            while is_close:
+                ship_specification = Ui.get_inputs(["Row", "Column", "Direction"],
+                                                   "\nPlease place {} which length is {}".format(key, value))
+                ship = Ship(key, ship_specification[0], ship_specification[1], ship_specification[2])
+                is_close = ship.check_enviroment(self.ocean.board)
+                ship.place_ship(self.ocean.board)
+                Ui.print_message(self.ocean)
