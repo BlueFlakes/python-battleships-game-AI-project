@@ -3,6 +3,7 @@ from models.square import Square
 from models.ocean import Ocean
 
 
+
 class Ship:
 
     def __init__(self, ship_name, row, column, direction):
