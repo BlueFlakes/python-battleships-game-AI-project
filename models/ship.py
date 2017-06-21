@@ -1,6 +1,6 @@
-from ui import Ui
-from square import Square
-from ocean import Ocean
+from Interface.ui import Ui
+from models.ocean import Ocean
+
 
 
 class Ship:

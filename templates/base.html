@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/static/bootstrap_css/bootstrap.css">
+    <link rel="shortcut icon"
+          href="http://www.dnispoleczne.pl/assets/loga/fundacje/_resampled/SetHeight300-lanowa.jpg"/>
+
+    <script src="/static/bootstrap_js/bootstrap.js"></script>
+    {% block head %}
+    <title>{% block title %}{% endblock %}</title>
+    {% endblock %}
+    <script src="https://www.w3schools.com/lib/w3data.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="col-sm-9">
+            {% block content %}
+            <article>
+                </article>
+            {% endblock %}
+        </div>
+    </div>
+    <script>
+        w3IncludeHTML();
+    </script>
+</body>
+</html>

@@ -1,4 +1,4 @@
-from square import Square
+from models.square import Square
 
 
 class Ocean:
@@ -34,17 +34,9 @@ class Ocean:
 
         return board, enemy_board, enumerate_records
 
-    def add_ship_to_board(self, ship):
-        pass
+    def add_ship_to_ocean(self, ship):
+        self.ships.append(ship)
 
     def is_every_ship_sunk(self):
-        pass
-
-
-def main():
-    baltic = Ocean()
-    print(baltic)
-
-
-if __name__ == '__main__':
-    main()
+        ships_condition = False if False in [ship.is_sunk for ship in self.ships] else True
+        return ships_condition

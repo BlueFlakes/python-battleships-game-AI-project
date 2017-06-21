@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width = device-width, initial-scale = 1">
+    <title>TITANIC GAME</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="/static/css/ocean.css"/>
+    <script type="text/javascript" src="/static/js/ocean.js"></script>
+</head>
+
+<body>
+<div>
+    <div>OCEAN</div>
+    <div id="result">
+        Now is turn of <span>{{ game.player_in_round.name }}</span>
+        <table class="table-bordered">
+            {% for row in game.player_in_round.ocean.enemy_board %}
+            <tr>
+                {% for cell in row %}
+                <td>
+                    {% if cell.is_hit == False %}
+                    <p>~</p>
+                    {% elif cell.is_hit %}
+                    {% if cell.is_element_of_ship %}
+                    <p>X</p>
+                    {% else %}
+                    <p>.</p>
+                    {% endif %}
+                    {% endif %}
+                </td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <form action="/refresh_simulation" method="post">
+        <input type="submit">
+    </form>
+</div>
+</body>
+
+
+</html>

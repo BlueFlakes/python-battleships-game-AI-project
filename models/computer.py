@@ -1,6 +1,6 @@
 from random import randint
 
-from ocean import Ocean
+from models.ocean import Ocean
 
 
 class Computer:
@@ -15,9 +15,7 @@ class Computer:
         self.is_winner = False if False in ships_statuses else True
 
     def shot(self):
-        row = randint(10)
-        column = randint(10)
-        coordinates = [row, column]
-        coordinates = str(coordinates[0]) + str(coordinates[1])
-
-        self.ocean.shot(coordinates)
+        row = randint(0, 9)
+        column = randint(0, 9)
+        square = self.ocean.enemy_board[row][column]
+        square.hit()
