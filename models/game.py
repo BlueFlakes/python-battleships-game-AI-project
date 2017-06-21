@@ -1,10 +1,11 @@
 from random import randint
 from time import sleep
 
-from ui import Ui
+from Interface.ui import Ui
 
 
 class Game:
+    current_game = None
 
     def __init__(self, player1, player2):
         self.type = "Multi player"
@@ -40,6 +41,14 @@ class Game:
             self.player_in_round = self.player2
 
         self.turn()
+
+    def set_first_player(self):
+        first_player_number = randint(1, 2)
+        if first_player_number == 1:
+            self.player_in_round = self.player1
+
+        else:
+            self.player_in_round = self.player2
 
     def player_switch(self):
         if self.player_in_round is self.player1:

@@ -1,7 +1,6 @@
-from ui import Ui
-from square import Square
-from ocean import Ocean
-import time
+from Interface.ui import Ui
+from models.square import Square
+from models.ocean import Ocean
 
 
 class Ship:
@@ -111,3 +110,4 @@ class Ship:
             end_column = "too far"
 
         return end_row, end_column
+

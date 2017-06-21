@@ -1,7 +1,7 @@
-from computer import Computer
-from game import Game
-from player import Player
-from ui import Ui
+from Interface.ui import Ui
+from models.computer import Computer
+from models.game import Game
+from models.player import Player
 
 
 def main():
