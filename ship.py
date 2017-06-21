@@ -1,6 +1,8 @@
 from ui import Ui
 from square import Square
 from ocean import Ocean
+import time
+
 
 class Ship:
 
@@ -33,47 +35,63 @@ class Ship:
         row = self.start_row
         column = self.start_column
         is_close = self.check_enviroment(board)
-        print(is_close)
+
         if is_close is False:
             for i in range(self.size):
-                try:
-                    board[row][column].is_element_of_ship = True
-                    self.squares.append(board[row][column])
-                    if self.direction == "right":
-                        column += 1
-                    elif self.direction == "left":
-                        column -= 1
-                    elif self.direction == "up":
-                        row -= 1
-                    elif self.direction == "down":
-                        row += 1
-                except IndexError:
-                    Ui.print_message("Ship can't be placed out of board!")
+                board[row][column].is_element_of_ship = True
+                self.squares.append(board[row][column])
+                if self.direction == "right":
+                    column += 1
+                elif self.direction == "left":
+                    column -= 1
+                elif self.direction == "up":
+                    row -= 1
+                elif self.direction == "down":
+                    row += 1
+
         else:
-            print('NOPE!')
+            Ui.print_message("Can\'t place a ship here!\n")
 
     def check_enviroment(self, board):
-        temp_list = []
+
         end_row, end_column = self.set_ship_end(board)
+        squares_around = self.set_squares_around(board, end_row, end_column)
 
-        if self.direction == 'right' or self.direction == 'left':
-            if self.direction == 'left':
-                end_row, end_column = self.start_row, self.start_column
+        if end_row == "too far" or end_column == "too far":
+            is_close = True
+        elif len(squares_around) > 0:
+            is_close = True if True in [item.is_element_of_ship for item in squares_around] else False
+        else:
+            is_close = True
 
-            for i in range(self.size + 2):
-                for j in range(3):
-                    temp_list.append(board[self.start_row + j - 1][self.start_column + i - 1])
-
-        elif self.direction == 'up' or self.direction == 'down':
-            if self.direction == 'up':
-                end_row, end_column = self.start_row, self.start_column
-
-            for i in range(self.size + 2):
-                for j in range(3):
-                    temp_list.append(board[self.start_row + i - 1][self.start_column + j - 1])
-
-        is_close = True if True in [item.is_element_of_ship for item in temp_list] else False
         return is_close
+
+    def set_squares_around(self, board, end_row, end_column):
+
+        squares_around = []
+
+        for i in range(self.size + 2):
+            for j in range(3):
+                try:
+                    if self.start_row + j - 1 < 0 or self.start_column + i - 1 < 0:
+                        print("wrong")
+                        continue
+                    elif self.direction == 'right':
+                        squares_around.append(board[self.start_row + j - 1][self.start_column + i - 1])
+                    elif self.direction == 'left':
+                        squares_around.append(board[self.start_row + j - 1][self.start_column - i + 1])
+                    elif self.direction == 'down':
+                        squares_around.append(board[self.start_row + i - 1][self.start_column + j - 1])
+                    elif self.direction == "up":
+                        squares_around.append(board[self.start_row - i + 1][self.start_column + j - 1])
+
+                except IndexError:
+                    print("wrong index")
+                    continue
+
+        print(len(squares_around))
+
+        return squares_around
 
     def set_ship_end(self, board):
         end_row = self.start_row
@@ -87,30 +105,9 @@ class Ship:
         elif self.direction == "down":
             end_row += (self.size - 1)
 
+        if end_row < 0 or end_row > 9:
+            end_row = "too far"
+        if end_column < 0 or end_column > 9:
+            end_column = "too far"
+
         return end_row, end_column
-
-
-def main():
-    baltyk = Ocean()
-    ship1 = Ship('carrier', 2, 3, 'right')
-    ship2 = Ship('carrier', 5, 4, 'right')
-    ship3 = Ship('carrier', 2, 3, 'left')
-    ship4 = Ship('carrier', 2, 4, 'right')
-    ship5 = Ship('carrier', 1, 3, 'left')
-
-    ship1.place_ship(baltyk.board)
-    print(baltyk)
-    ship2.place_ship(baltyk.board)
-    print(baltyk)
-    ship3.place_ship(baltyk.board)
-    print(baltyk)
-    ship4.place_ship(baltyk.board)
-    print(baltyk)
-    ship5.place_ship(baltyk.board)
-    print(baltyk)
-
-
-
-
-if __name__ == '__main__':
-    main()
