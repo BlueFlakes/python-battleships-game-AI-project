@@ -36,10 +36,11 @@ class Game:
         first_player_number = randint(1, 2)
         if first_player_number == 1:
             self.player_in_round = self.player1
-
         else:
             self.player_in_round = self.player2
 
+        self.player1.set_ships()
+        self.player2.set_ships()
         self.turn()
 
     def set_first_player(self):
