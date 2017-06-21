@@ -3,6 +3,7 @@ from models.square import Square
 
 class Ocean:
     __board_size = 10
+    alpha = dict([[chr(i), i - 65] for i in range(65, 65 + __board_size)])
 
     def __init__(self):
         self.ships = []
@@ -25,12 +26,12 @@ class Ocean:
         return board_to_display
 
     def __enumerate_alpha_index(self):
-        alpha = [chr(i) for i in range(65, 65 + self.__board_size)]
         enumerate_records = [' ' if i == 0 else str(i) for i in range(self.__board_size+2)]
         board = self.board[:]
         enemy_board = self.enemy_board[:]
-        board.insert(0, alpha)
-        enemy_board.insert(0, alpha)
+        board.insert(0, self.alpha)
+        enemy_board.insert(0, self.alpha)
+
 
         return board, enemy_board, enumerate_records
 
