@@ -40,6 +40,11 @@ class Game:
         else:
             self.player_in_round = self.player2
 
+        self.player1.set_ships()
+        self.player2.set_ships()
+
+        self.player1.ocean.enemy_board = self.player2.ocean.board
+        self.player2.ocean.enemy_board = self.player1.ocean.board
         self.turn()
 
     def set_first_player(self):
@@ -61,6 +66,10 @@ class Game:
             Ui.print_message(self.player_in_round.name + "     " + "")
             Ui.print_message(self.player_in_round.ocean)
             self.player_in_round.shot()
+            if self.player_in_round != self.player1:
+                self.player2.ocean.board = self.player_in_round.ocean.enemy_board
+            else:
+                self.player1.ocean.board = self.player_in_round.ocean.enemy_board
             sleep(3)
             if self.is_over:
                 Ui.print_message("{} won".format(self.player_in_round.name))
