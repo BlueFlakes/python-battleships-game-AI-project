@@ -70,7 +70,7 @@ class Game:
                 self.player2.ocean.board = self.player_in_round.ocean.enemy_board
             else:
                 self.player1.ocean.board = self.player_in_round.ocean.enemy_board
-            sleep(2)
+            sleep(1.5)
             if self.is_over:
                 Ui.print_message("{} won".format(self.player_in_round.name))
                 break
