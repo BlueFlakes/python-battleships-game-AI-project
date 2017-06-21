@@ -26,7 +26,7 @@ class Ship:
 
         return size
 
-    def check_status(self):
+    def ship_status(self):
         is_hit_statuses = [square.is_hit for square in self.squares]
 
         self.is_sunk = False if False in is_hit_statuses else True

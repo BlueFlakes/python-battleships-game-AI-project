@@ -11,21 +11,21 @@ class Game:
         self.type = "Multi player"
         self.player1 = player1
         self.player2 = player2
-        self.is_over = self.is_game_over()
+        self.is_over = None
         self.player_in_round = None
 
     def __init__(self, player, computer):
         self.type = "Single Player"
         self.player1 = player
         self.player2 = computer
-        self.is_over = self.is_game_over()
+        self.is_over = None
         self.player_in_round = None
 
     def __init__(self, computer1, computer2):
         self.type = "Simulation"
         self.player1 = computer1
         self.player2 = computer2
-        self.is_over = self.is_game_over()
+        self.is_over = None
         self.player_in_round = None
 
     def is_game_over(self):
@@ -61,17 +61,20 @@ class Game:
 
     def turn(self):
         while not self.is_over:
+            self.is_over = self.is_game_over()
             Ui.print_message(self.player_in_round.name + "     " + "")
             Ui.print_message(self.player_in_round.ocean)
             if self.player_in_round == self.player1:
                 self.player2.ocean = self.player_in_round.shot(self.player2.ocean)
             else:
                 self.player1.ocean = self.player_in_round.shot(self.player1.ocean)
-            sleep(0.5)
+            sleep(0.00)
+
             if self.is_over:
                 Ui.print_message("{} won".format(self.player_in_round.name))
                 break
             self.player_switch()
+        exit()
 
     @classmethod
     def check_coordinates(cls, coordinates, alphanumeric_dict):

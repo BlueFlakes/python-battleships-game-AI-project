@@ -13,13 +13,16 @@ class Computer:
         self.ocean = Ocean()
         self.last_shot = []
         self.previous_shots = []
+        self.is_winner = False
 
     def check_status(self):
-        ships_statuses = [ship.is_sunk for ship in self.ocean.ships]
+        self.is_winner = self.ocean.is_every_ship_sunk()
 
-        self.is_winner = False if False in ships_statuses else True
+        return self.is_winner
 
     def shot(self, enemy_ocean):
+        for ship in self.ocean.ships: ship.ship_status()
+
         hit = False
         while not hit:
             if self.level == "Easy":
