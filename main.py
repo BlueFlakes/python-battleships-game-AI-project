@@ -62,8 +62,14 @@ def start_multiplayer():
 
 
 def start_simulation():
-    levels = Ui.get_inputs(["Computer's level"], "Choose computers level")
-    level = levels[0]
+    for level in Computer.allowed_levels:
+        Ui.print_message("Option: {} ".format(level))
+    proper_level = False
+    while not proper_level:
+        levels = Ui.get_inputs(["Computer's level"], "Choose computers level")
+        level = levels[0]
+        if level in Computer.allowed_levels:
+            proper_level = True
 
     computer1 = Computer(level)
     computer2 = Computer(level)

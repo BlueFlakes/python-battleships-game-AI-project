@@ -64,10 +64,10 @@ class Game:
             Ui.print_message(self.player_in_round.name + "     " + "")
             Ui.print_message(self.player_in_round.ocean)
             if self.player_in_round == self.player1:
-                self.player_in_round.shot(self.player2.ocean)
+                self.player2.ocean = self.player_in_round.shot(self.player2.ocean)
             else:
-                self.player_in_round.shot(self.player1.ocean)
-            sleep(2)
+                self.player1.ocean = self.player_in_round.shot(self.player1.ocean)
+            sleep(0.5)
             if self.is_over:
                 Ui.print_message("{} won".format(self.player_in_round.name))
                 break
