@@ -40,11 +40,3 @@ class Ocean:
     def is_every_ship_sunk(self):
         ships_condition = False if False in [ship.is_sunk for ship in self.ships] else True
         return ships_condition
-
-
-def main():
-    baltic_sea = Ocean()
-
-
-if __name__ == '__main__':
-    main()
