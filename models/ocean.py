@@ -3,7 +3,9 @@ from models.square import Square
 
 class Ocean:
     __board_size = 10
-    alpha = dict([[chr(i), i - 65] for i in range(65, 65 + __board_size)])
+    # Creating dict with alphabet, A - amount of letters needed for columns index
+    # it's used to interpret alphanumeric coordinates
+    alphabet_dict = dict([[chr(i), i - 65] for i in range(65, 65 + __board_size)])
 
     def __init__(self):
         self.ships = []
@@ -29,8 +31,8 @@ class Ocean:
         enumerate_records = [' ' if i == 0 else str(i) for i in range(self.__board_size+2)]
         board = self.board[:]
         enemy_board = self.enemy_board[:]
-        board.insert(0, self.alpha)
-        enemy_board.insert(0, self.alpha)
+        board.insert(0, self.alphabet_dict)
+        enemy_board.insert(0, self.alphabet_dict)
 
 
         return board, enemy_board, enumerate_records

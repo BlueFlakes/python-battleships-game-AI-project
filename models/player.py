@@ -27,9 +27,9 @@ class Player:
 
         while not proper_coordinates:
             coordinates = Ui.get_inputs(["First coordinate", "Second coordinate"], "Where do you want to shot?")
-            proper_coordinates = Game.check_coordinates(coordinates, self.ocean.alpha)
+            proper_coordinates = Game.check_coordinates(coordinates, self.ocean.alphabet_dict)
 
         row = int(coordinates[1]) - 1
-        column = self.ocean.alpha[coordinates[0].upper()]
+        column = self.ocean.alphabet_dict[coordinates[0].upper()]
         square = self.ocean.enemy_board[row][column]
         square.hit()
