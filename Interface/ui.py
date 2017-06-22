@@ -53,7 +53,7 @@ class Ui:
         if wait_for_exit is True:
             option = float("inf")
             while not option == "0":
-                option = Ui.get_inputs([""], "")
+                option = Ui.get_inputs(["Press 0 to exit"], "")
                 option = option[0]
 
     @classmethod
