@@ -47,14 +47,14 @@ class Computer:
     def set_ships(self):
         directions = ['up', 'down', 'left', 'right']
 
-        for key, value in Ship.sizes.items():
+        for name, length in Ship.sizes.items():
             good_ship = True
 
-            while good_statek:
+            while good_ship:
                 row = randint(0, 9)
                 column = randint(0, 9)
                 direction = choice(directions)
-                ship = Ship(key, row, column,  direction)
+                ship = Ship(name, row, column,  direction)
                 good_ship = ship.check_enviroment(self.ocean.board)
                 ship.place_ship(self.ocean.board)
                 self.ocean.add_ship_to_ocean(ship)
