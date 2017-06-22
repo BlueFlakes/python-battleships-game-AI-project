@@ -36,37 +36,12 @@ class Computer:
                 if self.last_shot is None:
                     coordinates = self.random_shot()
                     enemy_ocean = self.normal_shot(coordinates, enemy_ocean)
-                for good_shot in self.good_shots:
-                    if good_shot[0] - 1 >= 0 and good_shot[0] + 1 <= 9 and good_shot[1] - 1 >= 0 and good_shot[
-                        1] + 1 <= 9:
-                        if not self.ocean.enemy_board[good_shot[0] - 1][good_shot[1]].is_hit:
-                            coordinates = (good_shot[0] - 1, good_shot[1])
-                            enemy_ocean = self.normal_shot(coordinates, enemy_ocean)
-                            hit = True
-                            return enemy_ocean
-                        elif not self.ocean.enemy_board[good_shot[0] + 1][good_shot[1]].is_hit:
-                            coordinates = (good_shot[0] + 1, good_shot[1])
-                            enemy_ocean = self.normal_shot(coordinates, enemy_ocean)
-                            hit = True
-                            return enemy_ocean
-
-                        elif not self.ocean.enemy_board[good_shot[0]][good_shot[1] + 1].is_hit:
-                            coordinates = (good_shot[0], good_shot[1] + 1)
-                            enemy_ocean = self.normal_shot(coordinates, enemy_ocean)
-                            hit = True
-                            return enemy_ocean
-
-                        elif good_shot[1] - 1 >= 0:
-                            if not self.ocean.enemy_board[good_shot[0]][good_shot[1] - 1].is_hit:
-                                coordinates = (good_shot[0], good_shot[1] - 1)
-                                enemy_ocean = self.normal_shot(coordinates, enemy_ocean)
-                                hit = True
-                                return enemy_ocean
-                if len(self.good_shots) == 0:
+                elif len(self.good_shots) > 0:
+                    enemy_ocean = self.near_shots(enemy_ocean)
+                elif len(self.good_shots) == 0:
                     enemy_ocean = self.smart_shot_search(enemy_ocean)
             hit = True
             return enemy_ocean
-
 
     def set_ships(self):
         directions = ['up', 'down', 'left', 'right']
@@ -78,7 +53,7 @@ class Computer:
                 row = randint(0, 9)
                 column = randint(0, 9)
                 direction = choice(directions)
-                ship = Ship(name, row, column,  direction)
+                ship = Ship(name, row, column, direction)
                 good_ship = ship.check_enviroment(self.ocean.board)
                 ship.place_ship(self.ocean.board)
                 self.ocean.add_ship_to_ocean(ship)
@@ -206,3 +181,31 @@ class Computer:
             return "{} is a loser!".format(self.name)
         else:
             return "{} has won the game!".format(self.name)
+
+    def near_shots(self, enemy_ocean):
+        for good_shot in self.good_shots:
+            if good_shot[0] - 1 >= 0 and good_shot[0] + 1 <= 9 and good_shot[1] - 1 >= 0 and good_shot[
+                1] + 1 <= 9:
+                if not self.ocean.enemy_board[good_shot[0] - 1][good_shot[1]].is_hit:
+                    coordinates = (good_shot[0] - 1, good_shot[1])
+                    enemy_ocean = self.normal_shot(coordinates, enemy_ocean)
+                    hit = True
+                    return enemy_ocean
+                elif not self.ocean.enemy_board[good_shot[0] + 1][good_shot[1]].is_hit:
+                    coordinates = (good_shot[0] + 1, good_shot[1])
+                    enemy_ocean = self.normal_shot(coordinates, enemy_ocean)
+                    hit = True
+                    return enemy_ocean
+
+                elif not self.ocean.enemy_board[good_shot[0]][good_shot[1] + 1].is_hit:
+                    coordinates = (good_shot[0], good_shot[1] + 1)
+                    enemy_ocean = self.normal_shot(coordinates, enemy_ocean)
+                    hit = True
+                    return enemy_ocean
+
+                elif good_shot[1] - 1 >= 0:
+                    if not self.ocean.enemy_board[good_shot[0]][good_shot[1] - 1].is_hit:
+                        coordinates = (good_shot[0], good_shot[1] - 1)
+                        enemy_ocean = self.normal_shot(coordinates, enemy_ocean)
+                        hit = True
+                        return enemy_ocean
