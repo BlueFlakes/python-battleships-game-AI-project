@@ -15,13 +15,22 @@
     <div>OCEAN</div>
     <div id="result">
         Now is turn of <span>{{ game.player_in_round.name }}</span>
+        {% if message %}
+        <h1>{{ message }}</h1>
+        {% endif %}
         <table class="table-bordered">
             {% for row in game.player_in_round.ocean.enemy_board %}
+            {% set count = loop.index %}
             <tr>
                 {% for cell in row %}
+                {% set count = count+loop.index %}
                 <td>
                     {% if cell.is_hit == False %}
-                    <p>~</p>
+                    <form action="/update_ocean" method="post">
+                        <input type="hidden" name="{{ count }}">
+                        <p>{{count}}</p>
+                        <input type="submit" value="~"/>
+                    </form>
                     {% elif cell.is_hit %}
                     {% if cell.is_element_of_ship %}
                     <p>X</p>
