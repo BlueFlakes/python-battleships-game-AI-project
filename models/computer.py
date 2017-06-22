@@ -185,7 +185,7 @@ class Computer:
     def near_shots(self, enemy_ocean):
         for good_shot in self.good_shots:
             if good_shot[0] - 1 >= 0 and good_shot[0] + 1 <= 9 and good_shot[1] - 1 >= 0 and good_shot[
-                1] + 1 <= 9:
+               1] + 1 <= 9:
                 if not self.ocean.enemy_board[good_shot[0] - 1][good_shot[1]].is_hit:
                     coordinates = (good_shot[0] - 1, good_shot[1])
                     enemy_ocean = self.normal_shot(coordinates, enemy_ocean)

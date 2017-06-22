@@ -50,6 +50,7 @@ class Game:
         self.player2.set_ships()
 
         self.turn()
+        exit = Ui.get_inputs(["Press any number to exit"], "")
 
     def set_first_player(self):
         first_player_number = randint(1, 2)
@@ -88,8 +89,6 @@ class Game:
 
         if isinstance(self.player1, Player) or isinstance(self.player2, Player):
             self.add_player_to_highscore()
-
-        exit()
 
     @classmethod
     def check_coordinates(cls, coordinates, alphanumeric_dict):

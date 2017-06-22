@@ -86,7 +86,7 @@ class Ship:
 
                 except IndexError:
                     continue
-        print(len(squares_around))
+
         return squares_around
 
     def set_ship_end(self, board):
