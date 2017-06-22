@@ -16,13 +16,12 @@ class Computer:
         self.previous_shots = []
         self.is_winner = False
         self.last_good_shot = None
+        self.is_loser = False
 
     def check_status(self):
-        for ship in self.ocean.ships:
-            ship.ship_status()
-        self.is_winner = self.ocean.is_every_ship_sunk()
+        self.is_loser = self.ocean.is_every_ship_sunk()
 
-        return self.is_winner
+        return self.is_loser
 
     def shot(self, enemy_ocean):
         hit = False
@@ -49,14 +48,14 @@ class Computer:
     def set_ships(self):
         directions = ['up', 'down', 'left', 'right']
 
-        for key, value in Ship.sizes.items():
+        for name, length in Ship.sizes.items():
             good_ship = True
 
             while good_ship:
                 row = randint(0, 9)
                 column = randint(0, 9)
                 direction = choice(directions)
-                ship = Ship(key, row, column,  direction)
+                ship = Ship(name, row, column,  direction)
                 good_ship = ship.check_enviroment(self.ocean.board)
                 ship.place_ship(self.ocean.board)
                 self.ocean.add_ship_to_ocean(ship)
@@ -150,3 +149,9 @@ class Computer:
             if coordinates not in self.previous_shots:
                 new_coordinates = True
         return new_coordinates
+
+    def __str__(self):
+        if self.is_loser is True:
+            return "{} is a loser!".format(self.name)
+        else:
+            return "{} has won the game!".format(self.name)
