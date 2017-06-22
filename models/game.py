@@ -61,7 +61,7 @@ class Game:
 
     def turn(self):
         while not self.is_over:
-            Ui.print_message(self.player_in_round.name + "     " + "")
+            Ui.print_message(self.player_in_round.name)
             Ui.print_message(self.player_in_round.ocean)
             if self.player_in_round == self.player1:
                 self.player2.ocean = self.player_in_round.shot(self.player2.ocean)
@@ -78,10 +78,9 @@ class Game:
         exit()
 
     def print_winner(self):
-        for i in range(2):
-            self.player_switch()
-            Ui.print_message(self.player_in_round.name + "     " + "")
-            Ui.print_message(self.player_in_round.ocean)
+        Ui.print_message(".......................................")
+        Ui.print_message(self.player_in_round.name)
+        Ui.print_message(self.player_in_round.ocean)
 
     @classmethod
     def check_coordinates(cls, coordinates, alphanumeric_dict):
