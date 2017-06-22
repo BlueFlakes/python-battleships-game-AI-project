@@ -13,14 +13,12 @@ class Computer:
         self.ocean = Ocean()
         self.last_shot = []
         self.previous_shots = []
-        self.is_winner = False
+        self.is_loser = False
 
     def check_status(self):
-        for ship in self.ocean.ships:
-            ship.ship_status()
-        self.is_winner = self.ocean.is_every_ship_sunk()
+        self.is_loser = self.ocean.is_every_ship_sunk()
 
-        return self.is_winner
+        return self.is_loser
 
     def shot(self, enemy_ocean):
         hit = False
@@ -58,3 +56,9 @@ class Computer:
                 good_ship = ship.check_enviroment(self.ocean.board)
                 ship.place_ship(self.ocean.board)
                 self.ocean.add_ship_to_ocean(ship)
+
+    def __str__(self):
+        if self.is_loser is True:
+            return "{} is a loser!".format(self.name)
+        else:
+            return "{} has won the game!".format(self.name)

@@ -9,7 +9,7 @@ class Ship:
     def __init__(self, ship_name, row, column, direction):
         self.name = ship_name.lower()
         self.is_sunk = False
-        self.start_column = int(column)
+        self.start_column = column
         self.start_row = int(row)
         self.direction = direction.lower()
 
@@ -25,10 +25,12 @@ class Ship:
 
         return size
 
-    def ship_status(self):
+    def check_status(self):
         is_hit_statuses = [square.is_hit for square in self.squares]
 
         self.is_sunk = False if False in is_hit_statuses else True
+
+        return self.is_sunk
 
     def place_ship(self, board):
         row = self.start_row
@@ -54,14 +56,15 @@ class Ship:
     def check_enviroment(self, board):
 
         end_row, end_column = self.set_ship_end(board)
-        squares_around = self.set_squares_around(board, end_row, end_column)
-
         if end_row == "too far" or end_column == "too far":
             is_close = True
-        elif len(squares_around) > 0:
-            is_close = True if True in [item.is_element_of_ship for item in squares_around] else False
         else:
-            is_close = True
+            squares_around = self.set_squares_around(board, end_row, end_column)
+
+            if len(squares_around) > 0:
+                is_close = True if True in [item.is_element_of_ship for item in squares_around] else False
+            else:
+                is_close = True
 
         return is_close
 
@@ -72,9 +75,7 @@ class Ship:
         for i in range(self.size + 2):
             for j in range(3):
                 try:
-                    if self.start_row + j - 1 < 0 or self.start_column + i - 1 < 0:
-                        continue
-                    elif self.direction == 'right':
+                    if self.direction == 'right':
                         squares_around.append(board[self.start_row + j - 1][self.start_column + i - 1])
                     elif self.direction == 'left':
                         squares_around.append(board[self.start_row + j - 1][self.start_column - i + 1])
@@ -85,7 +86,7 @@ class Ship:
 
                 except IndexError:
                     continue
-
+        print(len(squares_around))
         return squares_around
 
     def set_ship_end(self, board):

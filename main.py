@@ -51,7 +51,6 @@ def choose():
 
 
 def start_singleplayer():
-    # ui.display_screen("screens/level.txt")
     data = Ui.get_inputs(["Name", "Level"], "Please provide your name and choose difficulty level")
     player1 = Player(data[0])
 
@@ -76,13 +75,14 @@ def start_simulation():
         Ui.print_message("Option: {} ".format(level))
     proper_level = False
     while not proper_level:
-        levels = Ui.get_inputs(["Computer's level"], "Choose computers level")
-        level = levels[0]
+        levels = Ui.get_inputs(["Level", "Level"], "Choose computer\'s level")
+        comp1_level = levels[0]
+        comp2_level = levels[1]
         if level in Computer.allowed_levels:
             proper_level = True
 
-    computer1 = Computer(level)
-    computer2 = Computer(level)
+    computer1 = Computer(comp1_level)
+    computer2 = Computer(comp2_level)
     computer2.name = "Computer2"
 
     gameplay = Game(computer1, computer2)
