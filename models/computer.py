@@ -16,6 +16,7 @@ class Computer:
         self.previous_shots = []
         self.is_winner = False
         self.last_good_shot = None
+        self.good_shots = []
         self.is_loser = False
 
     def check_status(self):
@@ -35,12 +36,34 @@ class Computer:
                 if self.last_shot is None:
                     coordinates = self.random_shot()
                     enemy_ocean = self.normal_shot(coordinates, enemy_ocean)
-                elif not self.ocean.enemy_board[self.last_shot[0]][self.last_shot[1]].is_element_of_ship:
-                    coordinates = self.random_shot()
-                    enemy_ocean = self.normal_shot(coordinates, enemy_ocean)
-                else:
-                    if self.ocean.enemy_board[self.last_shot[0]][self.last_shot[1]].is_element_of_ship:
-                        enemy_ocean = self.smart_shot_search(enemy_ocean)
+                for good_shot in self.good_shots:
+                    if good_shot[0] - 1 >= 0 and good_shot[0] + 1 <= 9 and good_shot[1] - 1 >= 0 and good_shot[
+                        1] + 1 <= 9:
+                        if not self.ocean.enemy_board[good_shot[0] - 1][good_shot[1]].is_hit:
+                            coordinates = (good_shot[0] - 1, good_shot[1])
+                            enemy_ocean = self.normal_shot(coordinates, enemy_ocean)
+                            hit = True
+                            return enemy_ocean
+                        elif not self.ocean.enemy_board[good_shot[0] + 1][good_shot[1]].is_hit:
+                            coordinates = (good_shot[0] + 1, good_shot[1])
+                            enemy_ocean = self.normal_shot(coordinates, enemy_ocean)
+                            hit = True
+                            return enemy_ocean
+
+                        elif not self.ocean.enemy_board[good_shot[0]][good_shot[1] + 1].is_hit:
+                            coordinates = (good_shot[0], good_shot[1] + 1)
+                            enemy_ocean = self.normal_shot(coordinates, enemy_ocean)
+                            hit = True
+                            return enemy_ocean
+
+                        elif good_shot[1] - 1 >= 0:
+                            if not self.ocean.enemy_board[good_shot[0]][good_shot[1] - 1].is_hit:
+                                coordinates = (good_shot[0], good_shot[1] - 1)
+                                enemy_ocean = self.normal_shot(coordinates, enemy_ocean)
+                                hit = True
+                                return enemy_ocean
+                if len(self.good_shots) == 0:
+                    enemy_ocean = self.smart_shot_search(enemy_ocean)
             hit = True
             return enemy_ocean
 
@@ -85,6 +108,7 @@ class Computer:
             enemy_ocean = self.mark_sips(enemy_ocean, square)
             if square.is_element_of_ship:
                 enemy_square.is_element_of_ship = True
+                self.last_good_shot = coordinates
             enemy_square.hit()
             self.last_shot = coordinates
         return enemy_ocean
@@ -94,6 +118,33 @@ class Computer:
         hit = False
         while not hit:
             coordinates = None
+            if self.last_good_shot is not None:
+                if self.last_good_shot[0] - 1 >= 0:
+                    if not self.ocean.enemy_board[self.last_good_shot[0] - 1][self.last_good_shot[1]].is_hit:
+                        coordinates = (self.last_good_shot[0] - 1, self.last_good_shot[1])
+                        enemy_ocean = self.normal_shot(coordinates, enemy_ocean)
+                        hit = True
+                        return enemy_ocean
+                elif self.last_good_shot[0] + 1 <= 9:
+                    if not self.ocean.enemy_board[self.last_good_shot[0] + 1][self.last_good_shot[1]].is_hit:
+                        coordinates = (self.last_good_shot[0] + 1, self.last_good_shot[1])
+                        enemy_ocean = self.normal_shot(coordinates, enemy_ocean)
+                        hit = True
+                        return enemy_ocean
+
+                elif self.last_good_shot[1] + 1 <= 9:
+                    if not self.ocean.enemy_board[self.last_good_shot[0]][self.last_good_shot[1] + 1].is_hit:
+                        coordinates = (self.last_good_shot[0], self.last_good_shot[1] + 1)
+                        enemy_ocean = self.normal_shot(coordinates, enemy_ocean)
+                        hit = True
+                        return enemy_ocean
+                elif self.last_good_shot[1] - 1 >= 0:
+                    if not self.ocean.enemy_board[self.last_good_shot[0]][self.last_good_shot[1] - 1].is_hit:
+                        coordinates = (self.last_good_shot[0], self.last_good_shot[1] - 1)
+                        enemy_ocean = self.normal_shot(coordinates, enemy_ocean)
+                        hit = True
+                        return enemy_ocean
+
             for i, row in enumerate(self.ocean.enemy_board):
                 for j, column in enumerate(row):
                     if self.ocean.enemy_board[i][j].is_hit and self.ocean.enemy_board[i][j].is_element_of_ship:
