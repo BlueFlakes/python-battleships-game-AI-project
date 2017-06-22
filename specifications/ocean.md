@@ -1,20 +1,35 @@
 ### `ocean.py`
-#### This file contain ocean logic
+#### This file contains ocean logic
 ## Class Ocean
-#### Instance Attributes
+
+___Instance Attributes___
+
 * `Ships`
     * data: list
     * description: list of ship objects
 
 * `Board`
     * data: list
-    * description: list of nested lists contains map for battleship game :)
+    * description: list of nested lists, contains map for the battleship game :)
 
-* `Shots`
+* `Enemy_board`
     * data: list
-    * description: this list contains user picks
+    * description: list of nested lists, same as *board*
     
-#### Instance Methods
+___Instance Methods___
+
+* `__init__(self)`
+  
+  Creates ocean object
+  
+* `__str__(self)`
+
+  return string with player's *board* and *enemy_board*
+
+* `is_all_ships_sunk`
+
+  Check is every ship sunk
+
 * `create_board(self)`
   
   Create board which contain list of nested lists
@@ -23,15 +38,8 @@
 
   return string with 
 
-* `is_all_ships_sunk`
+* `is_every_ship_sunk(self)`
 
-  Check is every ship sunk
-
-* `insert ship into board`
-
-  Add ship to board
-
-* `update_board`
-  
-  Update changes to board
+  Checks if every player's ship is sunk
+ 
   

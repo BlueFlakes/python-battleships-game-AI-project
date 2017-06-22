@@ -3,30 +3,27 @@
 #### This is the file containing a square logic.
 ## Class Square
 #### Instance Attributes
-* ```row```
-    - data: int
-    - description: square horizontal position
-
-* ```column```
-    - data: int
-    - description: square vertical position
 
 * ```is_hit```
     - data: bool
     - description: element of ship, alive or not
     
-* ```is_ship```
+* ```is_element_of_ship```
     - data: bool
     - description: is square element of ship
 
 #### Instance Methods
-* ##### ```__init__(self, row, column, is_hit)```
-  Constructs an square, element of ship
+* ##### ```__init__(self)```
+  Constructs square, which is element of a ship
     
-* ```is_hit(self)```
+* ```hit(self)```
   
-  change the status of square
+  change the *is_hit* attribute of square
     
 * ```__str__(self)```
   
   return string according to is_hit value(bool)
+
+* ```attach_square_to_ship(self)```
+  
+  change the *is_element_of_ship* attribute
