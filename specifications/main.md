@@ -6,7 +6,15 @@ __Functions__
 
 * ##### `main()`
   - Starts the program.
-* `print_menu()`
-  - Prints main menu.
+  
 * `choose()`
   - Calls proper functions based on user's choice.
+  
+* `start_singleplayer()`
+  - Makes *Player* and *Computer* objects and starts the singleplayer mode
+  
+* `start_multiplayer()`
+  - Makes two *Player* objects and starts the multiplayer mode
+  
+* `start_simulation()`
+  - Makes two *Computer* objects and starts the simulation mode
