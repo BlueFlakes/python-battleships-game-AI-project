@@ -41,12 +41,30 @@ def multi():
     return render_template("Ocean.html", game=Game.current_game)
 
 
+@app.route('/update_ocean', methods=["POST"])
+def update():
+    counter_id = 0
+    for row in Game.current_game.player_in_round.ocean.enemy_board:
+        for cell in row:
+            counter_id += 1
+            if cell.id == counter_id:
+                if not cell.is_hit:
+                    cell.hit()
+                else:
+                    return render_template("Ocean.html", game=Game.current_game, message="It is hit already!")
+    Game.current_game.player_switch()
+    return render_template("Ocean.html", game=Game.current_game)
+
+
 @app.route('/simulation', methods=["POST"])
 def simulation():
     computer1_level = request.form["computer1_level"]
     computer2_level = request.form["computer2_level"]
     computer1 = Computer(computer1_level)
     computer2 = Computer(computer2_level)
+    computer2.name = "Computer 2"
+    computer1.set_ships()
+    computer2.set_ships()
     Game.current_game = Game(computer1, computer2)
     Game.current_game.set_first_player()
     return render_template("Ocean.html", game=Game.current_game)
@@ -54,7 +72,11 @@ def simulation():
 
 @app.route('/refresh_simulation', methods=["POST"])
 def refresh_simulation():
-    Game.current_game.player_in_round.shot()
+    if Game.current_game.player_in_round == Game.current_game.player1:
+        enemy_ocean = Game.current_game.player2.ocean
+    else:
+        enemy_ocean = Game.current_game.player1.ocean
+    Game.current_game.player_in_round.shot(enemy_ocean)
     Game.current_game.player_switch()
     return render_template("Ocean.html", game=Game.current_game)
 
