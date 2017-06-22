@@ -27,11 +27,49 @@ class Ui:
             print(title)
 
             for question in list_labels:
-                user_input = input(question + ': ')
+                check = True
+                while check:
+                    user_input = input(question + ': ')
+                    if len(str(user_input)) == 0:
+                        check = True
+                        cls.print_error_message('It can not be an empty, write something :)')
+
+                    elif question == 'Row' or question == 'Column':
+                        if user_input.isdigit():
+                            check = False
+                        else:
+                            cls.print_error_message('It is not a number, try again!')
+
+                    elif question == 'Level':
+                        if user_input == 'Easy' or user_input == 'Medium' or user_input == 'Hard':
+                            check = False
+                        else:
+                            cls.print_error_message('3 option to choose: Empty, Medium, Hard')
+
+                    elif question == 'Name':
+                        if user_input.isalpha():
+                            check = False
+                        else:
+                            cls.print_error_message('Rly?! Your name contain numbers or special chars? Are you a robot?')
+
+                    elif question == 'Direction':
+                        if user_input == 'up' or user_input == 'down' or user_input == 'left' or user_input == 'right':
+                            check = False
+                        else:
+                            cls.print_error_message('4 option to choose: up, down, left, right')
+                    else:
+                        check = False
                 inputs.append(user_input)
 
         elif len(list_labels) == 1:
-            user_input = input(list_labels[0] + ':')
+            check = True
+            while check:
+                user_input = input(list_labels[0] + ':')
+                if len(str(user_input)) == 0:
+                    check = True
+                    cls.print_error_message('It can not be an empty, write something :)')
+                else:
+                    check = False
             inputs.append(user_input)
 
         return inputs
