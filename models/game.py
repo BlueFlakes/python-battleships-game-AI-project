@@ -30,7 +30,11 @@ class Game:
 
     def is_game_over(self):
         if self.player1.check_status() is True or self.player2.check_status() is True:
-            return True
+            is_over = True
+        else:
+            is_over = False
+
+        return is_over
 
     def start_game(self):
         first_player_number = randint(1, 2)
@@ -64,28 +68,23 @@ class Game:
             Ui.print_message(self.player_in_round.name)
             Ui.print_message(self.player_in_round.ocean)
             if self.player_in_round == self.player1:
-                self.player2.ocean = self.player_in_round.shot(self.player2.ocean)
+                self.player_in_round.shot(self.player2.ocean)
             else:
-                self.player1.ocean = self.player_in_round.shot(self.player1.ocean)
+                self.player_in_round.shot(self.player1.ocean)
             sleep(0.00)
             self.is_over = self.is_game_over()
 
-            if self.is_over:
-                self.print_winner()
-                Ui.print_message("{} won".format(self.player_in_round.name))
-                break
             self.player_switch()
-        exit()
 
-    def print_winner(self):
-        Ui.print_message(".......................................")
-        Ui.print_message(self.player_in_round.name)
-        Ui.print_message(self.player_in_round.ocean)
+        if self.is_over:
+            print(self.player1)
+            print(self.player2)
+        exit()
 
     @classmethod
     def check_coordinates(cls, coordinates, alphanumeric_dict):
-        if coordinates[1].isdigit():
-            if coordinates[0].upper() in alphanumeric_dict and int(coordinates[1]) in range(1, 11):
+        if coordinates[0].isdigit():
+            if coordinates[1].upper() in alphanumeric_dict and int(coordinates[1]) in range(1, 11):
                 return True
             else:
                 return False

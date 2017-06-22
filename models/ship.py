@@ -9,7 +9,7 @@ class Ship:
     def __init__(self, ship_name, row, column, direction):
         self.name = ship_name.lower()
         self.is_sunk = False
-        self.start_column = int(column)
+        self.start_column = column
         self.start_row = int(row)
         self.direction = direction.lower()
 
@@ -25,10 +25,12 @@ class Ship:
 
         return size
 
-    def ship_status(self):
+    def check_status(self):
         is_hit_statuses = [square.is_hit for square in self.squares]
 
         self.is_sunk = False if False in is_hit_statuses else True
+
+        return self.is_sunk
 
     def place_ship(self, board):
         row = self.start_row
