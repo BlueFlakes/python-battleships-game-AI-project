@@ -18,24 +18,34 @@ def choose():
     Returns:
         option: string
     """
+    check = True
+    while check:
 
-    option = Ui.get_inputs(["Please choose an option"], "")
-    option = option[0]
+        option = Ui.get_inputs(["Please choose an option"], "")
+        option = option[0]
 
-    if option == "1":
-        start_singleplayer()
+        if option == "1":
+            start_singleplayer()
+            check = False
 
-    elif option == "2":
-        start_multiplayer()
+        elif option == "2":
+            start_multiplayer()
+            check = False
 
-    elif option == "3":
-        start_simulation()
+        elif option == "3":
+            start_simulation()
+            check = False
 
-    elif option == "4":
-        Ui.display_screen("screens/credits.txt", True)
+        elif option == "4":
+            Ui.display_screen("screens/credits.txt", True)
+            check = False
 
-    elif option == "0":
-        Ui.print_message("Good bye!")
+        elif option == "0":
+            Ui.print_message("Good bye!")
+            check = False
+        else:
+            check = True
+            Ui.print_error_message('You know there is no option like that, come on!')
 
     return option
 
