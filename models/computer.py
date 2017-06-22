@@ -5,12 +5,12 @@ from models.ship import Ship
 
 
 class Computer:
-    allowed_levels = ["Easy", "Medium", "Hard"]
+    allowed_levels = ["easy", "medium", "hard"]
     ships = Ship.sizes
 
     def __init__(self, level):
         self.name = "Computer"
-        self.level = level
+        self.level = level.lower()
         self.ocean = Ocean()
         self.last_shot = None
         self.previous_shots = []
@@ -27,12 +27,12 @@ class Computer:
     def shot(self, enemy_ocean):
         hit = False
         while not hit:
-            if self.level == "Easy":
+            if self.level == "easy":
                 coordinates = self.random_shot()
                 if coordinates == self.last_shot:
                     continue
                 enemy_ocean = self.normal_shot(coordinates, enemy_ocean)
-            if self.level == "Medium":
+            if self.level == "medium":
                 if self.last_shot is None:
                     coordinates = self.random_shot()
                     enemy_ocean = self.normal_shot(coordinates, enemy_ocean)
