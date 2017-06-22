@@ -16,7 +16,8 @@ class Computer:
         self.is_winner = False
 
     def check_status(self):
-        for ship in self.ocean.ships: ship.ship_status()
+        for ship in self.ocean.ships:
+            ship.ship_status()
         self.is_winner = self.ocean.is_every_ship_sunk()
 
         return self.is_winner
@@ -43,19 +44,17 @@ class Computer:
                 elif square == self.last_shot:
                     continue
 
-
-
     def set_ships(self):
         directions = ['up', 'down', 'left', 'right']
 
         for key, value in Ship.sizes.items():
-            good_statek = True
+            good_ship = True
 
             while good_statek:
                 row = randint(0, 9)
                 column = randint(0, 9)
                 direction = choice(directions)
                 ship = Ship(key, row, column,  direction)
-                good_statek = ship.check_enviroment(self.ocean.board)
+                good_ship = ship.check_enviroment(self.ocean.board)
                 ship.place_ship(self.ocean.board)
                 self.ocean.add_ship_to_ocean(ship)
