@@ -1,5 +1,4 @@
 from Interface.ui import Ui
-from models.game import Game
 from models.ocean import Ocean
 from models.ship import Ship
 
@@ -10,6 +9,7 @@ class Player:
         self.name = name
         self.is_loser = False
         self.ocean = Ocean()
+        self.counted_shots = 0
 
     def __str__(self):
         if self.is_loser is True:
@@ -32,10 +32,15 @@ class Player:
         column = alphanumeric_dict[coordinates[1].upper()]
         square = enemy_ocean.board[row][column]
         enemy_square = self.ocean.enemy_board[row][column]
-        square.hit()
-        if square.is_element_of_ship:
-            enemy_square.is_element_of_ship = True
-        enemy_square.hit()
+        if not square.is_hit:
+            square.hit()
+            if square.is_element_of_ship:
+                enemy_square.is_element_of_ship = True
+            enemy_square.hit()
+            self.counted_shots += 1
+            return True
+        else:
+            return False
 
     def set_ships(self):
         alphanumeric_dict = dict([[item for item in pair[::-1]] for pair in enumerate(self.ocean.alphabet_list[:])])

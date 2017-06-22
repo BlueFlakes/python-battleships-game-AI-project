@@ -2,6 +2,8 @@ from random import randint
 from time import sleep
 
 from Interface.ui import Ui
+from Interface.hall_of_fame import HallOfFame
+from models.player import Player
 
 
 class Game:
@@ -68,9 +70,13 @@ class Game:
             Ui.print_message(self.player_in_round.name)
             Ui.print_message(self.player_in_round.ocean)
             if self.player_in_round == self.player1:
-                self.player_in_round.shot(self.player2.ocean)
+                shot_done = False
+                while not shot_done:
+                    shot_done = self.player_in_round.shot(self.player2.ocean)
             else:
-                self.player_in_round.shot(self.player1.ocean)
+                shot_done = False
+                while not shot_done:
+                    shot_done = self.player_in_round.shot(self.player1.ocean)
             sleep(0.00)
             self.is_over = self.is_game_over()
 
@@ -79,6 +85,10 @@ class Game:
         if self.is_over:
             print(self.player1)
             print(self.player2)
+
+        if isinstance(self.player1, Player) or isinstance(self.player2, Player):
+            self.add_player_to_highscore()
+
         exit()
 
     @classmethod
@@ -90,3 +100,14 @@ class Game:
                 return False
         else:
             return False
+
+    def add_player_to_highscore(self):
+        if not self.player1.is_loser and isinstance(self.player1, Player):
+            name = self.player1.name
+            counted_shots = self.player1.counted_shots
+
+        elif not self.player2.is_loser and isinstance(self.player2, Player):
+            name = self.player2.name
+            counted_shots = self.player2.counted_shots
+
+        HallOfFame.save_to_file('Interface/hall_of_fame.csv', name, counted_shots)

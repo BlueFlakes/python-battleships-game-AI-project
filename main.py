@@ -1,4 +1,5 @@
 from Interface.ui import Ui
+from Interface.hall_of_fame import HallOfFame
 from models.computer import Computer
 from models.game import Game
 from models.player import Player
@@ -18,34 +19,32 @@ def choose():
     Returns:
         option: string
     """
-    check = True
-    while check:
 
-        option = Ui.get_inputs(["Please choose an option"], "")
-        option = option[0]
+    option = Ui.get_inputs(["Please choose an option"], "")
+    option = option[0]
 
-        if option == "1":
-            start_singleplayer()
-            check = False
+    if option == "1":
+        start_singleplayer()
 
-        elif option == "2":
-            start_multiplayer()
-            check = False
+    elif option == "2":
+        start_multiplayer()
 
-        elif option == "3":
-            start_simulation()
-            check = False
+    elif option == "3":
+        start_simulation()
 
-        elif option == "4":
-            Ui.display_screen("screens/credits.txt", True)
-            check = False
+    elif option == "4":
+        Ui.display_screen("screens/credits.txt", True)
 
-        elif option == "0":
-            Ui.print_message("Good bye!")
-            check = False
-        else:
-            check = True
-            Ui.print_error_message('You know there is no option like that, come on!')
+    elif option == "5":
+        Ui.display_screen("screens/highscore.txt")
+        HallOfFame.print_highscore("Interface/hall_of_fame.csv")
+        exit = "1"
+        while not exit == "0":
+            exit = Ui.get_inputs(["Press 0 to exit"], "")
+            exit = exit[0]
+
+    elif option == "0":
+        Ui.print_message("Good bye!")
 
     return option
 
