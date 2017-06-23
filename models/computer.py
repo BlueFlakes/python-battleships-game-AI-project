@@ -40,6 +40,13 @@ class Computer:
                     enemy_ocean = self.near_shots(enemy_ocean)
                 elif len(self.good_shots) == 0:
                     enemy_ocean = self.smart_shot_search(enemy_ocean)
+            if self.level == "hard":
+                if self.last_shot is None:
+                    enemy_ocean = self.tactical_shot(enemy_ocean)
+                elif len(self.good_shots) > 0:
+                    enemy_ocean = self.near_shots(enemy_ocean)
+                elif len(self.good_shots) == 0:
+                    enemy_ocean = self.smart_shot_search(enemy_ocean)
             hit = True
             return enemy_ocean
 
@@ -209,3 +216,11 @@ class Computer:
                         enemy_ocean = self.normal_shot(coordinates, enemy_ocean)
                         hit = True
                         return enemy_ocean
+
+    def tactical_shot(self, enemy_ocean):
+        for i, row in enumerate(self.ocean.enemy_board):
+            for j, column in enumerate(row):
+                if not self.ocean.enemy_board[i][j].is_hit:
+                    coordinates = (i, j)
+                    enemy_ocean = self.normal_shot(coordinates, enemy_ocean)
+                    return enemy_ocean
