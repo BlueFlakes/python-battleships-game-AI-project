@@ -6,6 +6,10 @@ from models.player import Player
 
 
 def main():
+    '''
+    Function start the program.
+    '''
+
     option = float("inf")
     while not (option == "0"):
         Ui.display_screen("screens/menu.txt")
@@ -17,7 +21,9 @@ def choose():
     Calls proper functions based on user's choice.
 
     Returns:
-        option: string
+    --------
+    option: string
+        It is the number which user choose from main menu.
     """
 
     option = Ui.get_inputs(["Please choose an option"], "")
@@ -50,6 +56,14 @@ def choose():
 
 
 def start_singleplayer():
+    '''
+    Makes *Player* and *Computer* objects and starts the singleplayer
+
+    Returns
+    -------
+    None
+    '''
+
     data = Ui.get_inputs(["Name", "Level"], "Please provide your name and choose difficulty level")
     player1 = Player(data[0])
 
@@ -61,6 +75,14 @@ def start_singleplayer():
 
 
 def start_multiplayer():
+    '''
+    Makes two *Player* objects and starts the multiplayer mode.
+
+    Returns
+    -------
+    None
+    '''
+
     players = Ui.get_inputs(["First player's name", "Second player's name"], "Please provide your names")
     player1 = Player(players[0])
     player2 = Player(players[1])
@@ -70,6 +92,14 @@ def start_multiplayer():
 
 
 def start_simulation():
+    '''
+    Makes two *Computer* objects and starts the simulation mode.
+
+    Returns
+    -------
+    None
+    '''
+
     for level in Computer.allowed_levels:
         Ui.print_message("Option: {} ".format(level))
     proper_level = False
