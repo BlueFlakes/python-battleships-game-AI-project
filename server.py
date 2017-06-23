@@ -27,6 +27,24 @@ def single():
     Game.current_game.set_first_player()
     return render_template("Ocean.html", game=Game.current_game)
 
+@app.route("/update_single", methods=["POST"])
+def update_single():
+    if Game.current_game.player_in_round != Game.current_game.player1:
+        other_player = Game.current_game.player1
+    else:
+        other_player = Game.current_game.player2
+    counter = -1
+    counter1 = -1
+    for row in Game.current_game.player_in_round.ocean.enemy_board:
+        counter += 1
+        for cell in row:
+            counter1 += 1
+            position = "{}{}".format(counter, counter1)
+            coord = [position[0], position[1]]
+            if position == request.form['{}'.format(position)] and not cell.is_hit:
+                Game.current_game.player_in_round.shot(other_player.ocean, coord)
+    Game.current_game.player_switch()
+    return render_template("Ocean.html", game=Game.current_game)
 
 @app.route('/multi', methods=["POST"])
 def multi():
@@ -67,6 +85,8 @@ def simulation():
     computer2.set_ships()
     Game.current_game = Game(computer1, computer2)
     Game.current_game.set_first_player()
+    if Game.current_game.is_over:
+        return render_template("Ocean.html", game=Game.current_game, winner=Game.current_game.player_in_round.name)
     return render_template("Ocean.html", game=Game.current_game)
 
 

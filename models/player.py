@@ -53,3 +53,18 @@ class Player:
                 ship.place_ship(self.ocean.board)
                 Ui.print_message(self.ocean)
             self.ocean.add_ship_to_ocean(ship)
+
+    def shot(self, enemy_ocean, coord):
+        proper_coordinates = False
+        alphanumeric_dict = dict([[item for item in pair[::-1]] for pair in enumerate(self.ocean.alphabet_list[:])])
+
+        coordinates = coord
+
+        row = int(coordinates[0]) - 1
+        column = alphanumeric_dict[coordinates[1].upper()]
+        square = enemy_ocean.board[row][column]
+        enemy_square = self.ocean.enemy_board[row][column]
+        square.hit()
+        if square.is_element_of_ship:
+            enemy_square.is_element_of_ship = True
+        enemy_square.hit()
