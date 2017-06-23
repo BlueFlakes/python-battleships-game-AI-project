@@ -2,8 +2,24 @@ import csv
 
 
 class HallOfFame:
+    """
+    Class contains multiple methods.
+    """
     @classmethod
     def print_highscore(cls, filename):
+        """
+        Reads .csv file and displays it correctly.
+
+        Parameters
+        ----------
+        filename: csv filename
+            name of the csv file
+
+        Returns
+        ----------
+        None
+        """
+
         with open(filename, "r") as f:
             highscore = f.readlines()
         for i in range(len(highscore)):
@@ -21,10 +37,42 @@ class HallOfFame:
 
     @classmethod
     def save_to_file(cls, filename, name, counted_shots):
+        """
+        Saves winner's data to .csv file
+
+        Parameters
+        ----------
+        filename: csv filename
+            name of the csv file
+
+        name: string
+            contain winner player name
+
+        counted_shots: int
+            contain shots of winner player
+
+        Returns
+        ----------
+        None
+        """
+
         with open(filename, "a") as f:
             writer = csv.writer(f, delimiter=",")
             writer.writerow([name, counted_shots])
 
     @classmethod
     def sort_highscore(cls, highscore):
+        """
+        Sorts highscore in increasing order.
+
+        Parameters
+        ----------
+        highscore: list of lists
+            list contain lists wit name and counted shots of winner players
+
+        Returns
+        ----------
+        None
+        """
+
         highscore.sort(key=lambda score: score[1])

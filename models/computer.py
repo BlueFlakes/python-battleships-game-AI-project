@@ -5,10 +5,47 @@ from models.ship import Ship
 
 
 class Computer:
+    """
+    Constructs a Computer object, def multiple methods for it manipulation, returns it as a formatted string
+    """
     allowed_levels = ["easy", "medium", "hard"]
     ships = Ship.sizes
 
     def __init__(self, level):
+        """
+        Constructs a Computer object
+
+        Instance Attributes
+        -------------------
+        self.name
+        data: string
+            description: name of the player
+
+        self.level
+        data: string
+            description: Level of computer's logic. May be easy, medium or hard.
+
+        self.ocean
+        data: Ocean()
+            description: Ocean instance
+
+        self.last_shot
+        data: Ocean.board coordinates
+            description: Contains coordinates of last computer's shot
+
+        self.previous shot
+        data: Ocean.board coordinates
+            description: Contains coordinates of previous computer's shot
+
+        last_good_shot
+        data: Ocean.board coordinates
+            description: Contains coordinates of last good computer's shot
+
+        good_shot
+        data: list
+            description: List of all computer's good shots
+        """
+
         self.name = "Computer"
         self.level = level.lower()
         self.ocean = Ocean()
@@ -20,11 +57,32 @@ class Computer:
         self.is_loser = False
 
     def check_status(self):
+        """
+        Sets is_loser attribute to True if all player's ships are sunk, otherwise sets False.
+
+        Returns
+        -------
+        self.is_loser
+        """
+
         self.is_loser = self.ocean.is_every_ship_sunk()
 
         return self.is_loser
 
     def shot(self, enemy_ocean):
+        """
+        Returns enemy Ocean object with one more Square hit
+
+        Parameters
+        ---------
+        enemey_ocean: :object:
+            instance of Ocean()
+
+        Returns
+        -------
+        self.is_loser
+        """
+
         hit = False
         while not hit:
             if self.level == "easy":
@@ -53,6 +111,15 @@ class Computer:
             return enemy_ocean
 
     def set_ships(self):
+        """
+        Randomly places ships on the Ocean.board.
+
+        Returns
+        -------
+        enemey_ocean: :object:
+            instance of Ocean()
+        """
+
         directions = ['up', 'down', 'left', 'right']
 
         for name, length in Ship.sizes.items():
@@ -68,22 +135,55 @@ class Computer:
                 self.ocean.add_ship_to_ocean(ship)
 
     def mark_sips(self, enemy_ocean, square):
-        for ship in enemy_ocean.ships:
-            for sqr in ship.squares:
-                if sqr == square:
-                    sqr.hit()
-        for another_ship in self.ocean.ships:
-            for sqr1 in another_ship.squares:
-                if sqr1 == square:
-                    sqr1.hit()
-        return enemy_ocean
+            """
+            Sets correct Square object is_hit attribute to True
+
+            Parameters
+            ---------
+            enemey_ocean: :object:
+                instance of Ocean()
+
+            Returns
+            -------
+            self.is_loser
+            """
+            for ship in enemy_ocean.ships:
+                for sqr in ship.squares:
+                    if sqr == square:
+                        sqr.hit()
+            for another_ship in self.ocean.ships:
+                for sqr1 in another_ship.squares:
+                    if sqr1 == square:
+                        sqr1.hit()
+            return enemy_ocean
 
     def random_shot(self):
+        """
+        Return random shot
+        -------
+        list
+        """
+
         row = randint(0, 9)
         column = randint(0, 9)
         return [row, column]
 
     def normal_shot(self, coordinates, enemy_ocean):
+        """
+        Makes shot based on last shots, last good shots etc.
+
+        Parameters
+        ---------
+        enemey_ocean: :object:
+            instance of Ocean()
+
+        coordinates: list
+
+        Returns
+        -------
+        enemy_object: :obj:
+        """
+
         coordinates = self.check_coordinates(coordinates)
         square = enemy_ocean.board[coordinates[0]][coordinates[1]]
         if not square.is_hit:
@@ -98,7 +198,20 @@ class Computer:
         return enemy_ocean
 
     def smart_shot_search(self, enemy_ocean):
+        """
+        Search for the best shot
+
+        Parameters
+        ---------
+        enemey_ocean: :object:
+            instance of Ocean()
+
+        Returns
+        -------
+        enemy_object: :obj:
+        """
         # square = enemy_ocean.board[coordinates[0]][coordinates[1]]
+
         hit = False
         while not hit:
             coordinates = None
