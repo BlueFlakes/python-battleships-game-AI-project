@@ -1,5 +1,5 @@
 from random import randint, choice
-
+from models.Artificial_intelligence import Smart_ai
 from models.ocean import Ocean
 from models.ship import Ship
 
@@ -41,8 +41,10 @@ class Computer:
                 elif len(self.good_shots) == 0:
                     enemy_ocean = self.smart_shot_search(enemy_ocean)
             if self.level == "hard":
+                ai = Smart_ai(enemy_ocean)
                 if self.last_shot is None:
-                    enemy_ocean = self.tactical_shot(enemy_ocean)
+                    coordinates = ai.map()
+                    enemy_ocean = self.normal_shot(coordinates, enemy_ocean)
                 elif len(self.good_shots) > 0:
                     enemy_ocean = self.near_shots(enemy_ocean)
                 elif len(self.good_shots) == 0:
