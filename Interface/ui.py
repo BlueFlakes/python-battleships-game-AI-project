@@ -14,14 +14,17 @@ class Ui:
             Surname <user_input_2>
             Age <user_input_3>
 
-        Args:
+        Parameters:
+        ----------
             list_labels: list of strings - labels of inputs
             title: string - title of the "input section"
 
         Returns:
+        ----------
             List of data given by the user. Sample return:
                 [<user_input_1>, <user_input_2>, <user_input_3>]
         """
+
         inputs = []
 
         print(title)
@@ -46,6 +49,22 @@ class Ui:
 
     @classmethod
     def display_screen(cls, file_name, wait_for_exit=False):
+        """
+        Reads txt file and displays it correctly.
+
+        Parameters
+        ----------
+        filename: txt filename
+            name of the txt file
+
+        wait_for_exit: boolean
+            default ==  False
+
+        Returns
+        ----------
+        None
+        """
+
         os.system("clear")
         with open(file_name, "r") as f:
             print(f.read())
@@ -58,14 +77,54 @@ class Ui:
 
     @classmethod
     def print_error_message(cls, message):
+        """
+        Print error message
+
+        Parameters
+        ----------
+        message: string
+            message to print
+
+        Returns
+        ----------
+        None
+        """
         print(message)
 
     @classmethod
     def print_message(cls, message):
+        """
+        Print message
+
+        Parameters
+        ----------
+        message: string
+            message to print
+
+        Returns
+        ----------
+        None
+        """
         print(message)
 
     @classmethod
     def check_answer(cls, question, user_answer):
+        """
+        Controls user input, based on question which was asked.
+
+        Parameters
+        ----------
+        question: string
+            message to print
+
+        user_answer: string
+            user answer to check
+
+        Returns
+        ----------
+        correctness: boolen
+        """
+
         correctness = False
         user_answer = user_answer.lower()
 
@@ -107,6 +166,21 @@ class Ui:
 
     @classmethod
     def check_characters(cls, user_answer, letters=True):
+        """
+        Controls user input for one character only.
+
+        Parameters
+        ----------
+        letters: boolean
+            default True
+
+        user_answer: string or int
+            user answer to check
+
+        Returns
+        ----------
+        correctness: boolen
+        """
         correctness = False
 
         if letters is True:
@@ -125,6 +199,20 @@ class Ui:
 
     @classmethod
     def check_column(cls, user_answer):
+        """
+        Controls user input for question about column to shot.
+
+        Parameters
+        ---------
+
+        user_answer: string or int
+            user answer to check
+
+        Returns
+        ----------
+        correctness: boolen
+        """
+
         if len(user_answer) > 1:
             correctness = False
             cls.print_error_message("Please enter one character only!")
