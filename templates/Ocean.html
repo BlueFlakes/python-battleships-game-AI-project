@@ -30,7 +30,7 @@
                 <td>
                     {% if cell.is_hit == False %}
                     <form action="/update_single" method="post">
-                        <input type="hidden" name="{{ count-1 }}{{ count1-1 }}" value="{{count}}{{count1}}">
+                        <input type="hidden" name="j" value="{{count}}{{count1}}">
                         <p>{{ count }}|{{ count1 }}</p>
                         <input type="submit" value="~"/>
                     </form>

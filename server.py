@@ -33,18 +33,18 @@ def update_single():
         other_player = Game.current_game.player1
     else:
         other_player = Game.current_game.player2
-    counter = -1
-    counter1 = -1
+    counter = 0
     for row in Game.current_game.player_in_round.ocean.enemy_board:
         counter += 1
+        counter1 = 0
         for cell in row:
             counter1 += 1
             position = "{}{}".format(counter, counter1)
-            coord = [position[0], position[1]]
-            if position == request.form['{}'.format(position)] and not cell.is_hit:
-                Game.current_game.player_in_round.shot(other_player.ocean, coord)
+            if position == request.form["j"] and not cell.is_hit:
+                cell.hit()
     Game.current_game.player_switch()
     return render_template("Ocean.html", game=Game.current_game)
+
 
 @app.route('/multi', methods=["POST"])
 def multi():

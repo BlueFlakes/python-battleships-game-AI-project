@@ -1,5 +1,4 @@
 from Interface.ui import Ui
-from models.game import Game
 from models.ocean import Ocean
 from models.ship import Ship
 
